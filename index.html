@@ -297,6 +297,28 @@
     to { transform: rotate(360deg); }
   }
   
+  /* Editor toolbar styles */
+  .editor-toolbar {
+    margin: 5px 0;
+    padding: 5px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+  }
+  
+  .editor-toolbar button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .editor-toolbar button:hover {
+    background: rgba(255,255,255,0.3);
+  }
+  
   /* Responsive */
   @media (max-width: 900px){
     nav{ display:none; }   /* use dropdown on mobile */
@@ -436,26 +458,33 @@
       <input type="hidden" id="post-image" class="image-url-input">
     </div>
     
+    <div class="editor-toolbar">
+      <button onclick="formatText('bold')"><b>B</b></button>
+      <button onclick="formatText('italic')"><i>I</i></button>
+      <button onclick="formatText('underline')"><u>U</u></button>
+      <button onclick="formatText('hiliteColor', 'yellow')">Highlight</button>
+    </div>
+    
     <label for="post-description">Post Description:</label>
-<div id="post-description" contenteditable="true" 
-     style="border:1px solid #ccc; padding:10px; min-height:150px; width:100%; overflow:auto; background: rgba(255,255,255,0.1); color: #fff;">
-  Type your post here...
-</div>
+    <div id="post-description" contenteditable="true" 
+         style="border:1px solid #ccc; padding:10px; min-height:150px; width:100%; overflow:auto; background: rgba(255,255,255,0.1); color: #fff;">
+      Type your post here...
+    </div>
     <select id="post-topic" style="width:100%; padding:10px; border-radius:8px; border:none; margin:5px 0;">
-  <option value="">--Select Topic--</option>
-  <option value="health">Health & Wellness</option>
-  <option value="selflove">Self Love & Mental Health</option>
-  <option value="relationships">Relationships & Family</option>
-  <option value="education">Education & Knowledge</option>
-  <option value="motivation">Motivation & Inspiration</option>
-  <option value="spirituality">Spirituality & Law of Attraction</option>
-  <option value="lifestyle">Lifestyle & Daily Living</option>
-  <option value="finance">Finance & Career</option>
-  <option value="trending">Trending & World News</option>
-  <option value="nature">Nature & Environment</option>
-  <option value="technology">Technology & Innovation</option>
-  <option value="community">Community Stories</option>
-</select>
+      <option value="">--Select Topic--</option>
+      <option value="health">Health & Wellness</option>
+      <option value="selflove">Self Love & Mental Health</option>
+      <option value="relationships">Relationships & Family</option>
+      <option value="education">Education & Knowledge</option>
+      <option value="motivation">Motivation & Inspiration</option>
+      <option value="spirituality">Spirituality & Law of Attraction</option>
+      <option value="lifestyle">Lifestyle & Daily Living</option>
+      <option value="finance">Finance & Career</option>
+      <option value="trending">Trending & World News</option>
+      <option value="nature">Nature & Environment</option>
+      <option value="technology">Technology & Innovation</option>
+      <option value="community">Community Stories</option>
+    </select>
     <button onclick="addPost()" style="padding:10px 14px; background:var(--gold); color:#000; border:none; border-radius:8px; font-weight:800; cursor:pointer;">Add Post</button>
   </div>
   <!-- Add Shop Product -->
@@ -617,7 +646,7 @@ let rewardsLink    = "https://www.rewards.com";
 let submissionLink = "https://example.com/submit";
 // Function to fetch data from Google Sheet
 function fetchFromSheet(type) {
-  return fetch(`https://script.google.com/macros/s/AKfycbyVNtTP7gegLepvqVfookVcaCkbFRmZ3iu6X1xwoogEQqJK5wYE4cGW5muE7L2CWOM/exec?type=${type}`)
+  return fetch(`https://script.google.com/macros/s/AKfycbxRpeJe-ljTu7KlkKYvWJEJ745IfmyVq-JNHmUyTU6kXsWmCwf207gWMPHsDYxpl1w/exec?type=${type}`)
     .then(res => res.json())
     .then(data => {
       if (data.status === "success") {
@@ -638,7 +667,7 @@ function sendToSheet(data) {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
   
-  return fetch("https://script.google.com/macros/s/AKfycbyVNtTP7gegLepvqVfookVcaCkbFRmZ3iu6X1xwoogEQqJK5wYE4cGW5muE7L2CWOM/exec", {
+  return fetch("https://script.google.com/macros/s/AKfycbxRpeJe-ljTu7KlkKYvWJEJ745IfmyVq-JNHmUyTU6kXsWmCwf207gWMPHsDYxpl1w/exec", {
     method: "POST",
     body: JSON.stringify(data),
     headers: { "Content-Type": "application/json" },
@@ -935,6 +964,11 @@ function setupImageUpload(uploadId, previewId, statusId, inputId) {
     }
   });
 }
+// Format text function for content editor
+function formatText(command, value = null) {
+  document.execCommand(command, false, value);
+  document.getElementById('post-description').focus();
+}
 // New addPost function with proper HTML handling
 window.addPost = function() {
   const title = document.getElementById('post-title').value.trim();
@@ -1078,6 +1112,32 @@ window.addRecommendedProduct = function() {
       }
     });
 }
+
+function testConnection() {
+  fetch("https://script.google.com/macros/s/AKfycbxRpeJe-ljTu7KlkKYvWJEJ745IfmyVq-JNHmUyTU6kXsWmCwf207gWMPHsDYxpl1w/exec", {
+      method: "POST",
+      body: JSON.stringify({ type: "test" }),
+      headers: { "Content-Type": "application/json" },
+      mode: 'no-cors'
+    })
+    .then(() => {
+      alert("Connection successful!");
+    })
+    .catch(err => {
+      alert("Connection failed: " + err);
+    });
+}
+
+function submitToForm(formData) {
+  const formUrl = "https://docs.google.com/spreadsheets/d/1rrZlB9inPai78D3EFIiUPMnzPM1Bv3MLqHAjBDNffl0/edit?gid=0#gid=0";
+  const urlWithParams = formUrl + "&" + new URLSearchParams(formData).toString();
+  
+  return fetch(urlWithParams, {
+    method: "GET",
+    mode: 'no-cors'
+  });
+}
+
 // Load data from Google Sheets on page load
 function loadDataFromSheets() {
   // Load posts
