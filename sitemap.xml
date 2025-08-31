@@ -1,19 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <!-- Main Page -->
    <url>
       <loc>https://fasashwina92-blip.github.io/MyTepo/</loc>
       <lastmod>2025-08-30</lastmod>
       <priority>1.00</priority>
    </url>
+   
+   <!-- Topic Sections (using anchor links) -->
    <url>
-      <loc>https://fasashwina92-blip.github.io/MyTepo/post1.html</loc>
+      <loc>https://fasashwina92-blip.github.io/MyTepo/#recent-posts</loc>
+      <lastmod>2025-08-30</lastmod>
+      <priority>0.90</priority>
+   </url>
+   <url>
+      <loc>https://fasashwina92-blip.github.io/MyTepo/#health</loc>
       <lastmod>2025-08-30</lastmod>
       <priority>0.80</priority>
    </url>
    <url>
-      <loc>https://fasashwina92-blip.github.io/MyTepo/post2.html</loc>
+      <loc>https://fasashwina92-blip.github.io/MyTepo/#selflove</loc>
       <lastmod>2025-08-30</lastmod>
       <priority>0.80</priority>
    </url>
-   <!-- keep adding your posts up to 500 URLs -->
+   <url>
+      <loc>https://fasashwina92-blip.github.io/MyTepo/#relationships</loc>
+      <lastmod>2025-08-30</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://fasashwina92-blip.github.io/MyTepo/#education</loc>
+      <lastmod>2025-08-30</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://fasashwina92-blip.github.io/MyTepo/#motivation</loc>
+      <lastmod>2025-08-30</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://fasashwina92-blip.github.io/MyTepo/#spirituality</loc>
+      <lastmod>2025-08-30</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://fasashwina92-blip.github.io/MyTepo/#lifestyle</loc>
+      <lastmod>2025-08-30</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://fasashwina92-blip.github.io/MyTepo/#finance</loc>
+      <lastmod>2025-08-30</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://fasashwina92-blip.github.io/MyTepo/#trending</loc>
+      <lastmod>2025-08-30</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://fasashwina92-blip.github.io/MyTepo/#nature</loc>
+      <lastmod>2025-08-30</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://fasashwina92-blip.github.io/MyTepo/#technology</loc>
+      <lastmod>2025-08-30</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://fasashwina92-blip.github.io/MyTepo/#community</loc>
+      <lastmod>2025-08-30</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://fasashwina92-blip.github.io/MyTepo/#shop</loc>
+      <lastmod>2025-08-30</lastmod>
+      <priority>0.70</priority>
+   </url>
+   <url>
+      <loc>https://fasashwina92-blip.github.io/MyTepo/#recommended-products</loc>
+      <lastmod>2025-08-30</lastmod>
+      <priority>0.70</priority>
+   </url>
 </urlset>
