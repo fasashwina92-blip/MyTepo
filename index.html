@@ -1,13 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Holistic Glow</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
   :root{
     --gold:#FFD700;
@@ -21,7 +19,6 @@
     background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center fixed;
     background-size:cover;
   }
-
   /* Header / Title */
   header{ text-align:center; padding:56px 20px; background:var(--glass); }
   header h1{
@@ -36,14 +33,12 @@
     0 0 2px #000,
     0 2px 2px rgba(0,0,0,0.2);
 }
-
   /* Language dropdown */
   .language-select{
     position:absolute; top:18px; right:18px; z-index:10;
     padding:10px 12px; border-radius:8px; border:none;
     background: rgba(0,0,0,0.7); color:#fff; font-weight:700; cursor:pointer;
   }
-
   /* Nav */
   nav{
     position:sticky; top:0; z-index:8;
@@ -56,22 +51,30 @@
   }
   nav a:hover{ background: rgba(255,255,255,0.18); }
   nav a.active{ background: linear-gradient(90deg,var(--gold),var(--gold-2)); color:#000; }
-
   /* Mobile topic dropdown (dark) */
   #nav-select{
     display:none; width:92%; margin:10px auto 0;
     padding:12px; border-radius:8px; border:none; font-weight:700;
     background: rgba(0,0,0,0.75); color:#fff;
   }
-
   /* Sections */
   section{
     padding:44px 20px; margin:20px auto; max-width:1200px;
     background: var(--glass); border-radius:16px;
   }
-  section h2{ text-align:center; margin:0 0 22px; font-size: clamp(1.6rem, 3.3vw, 2.4rem); font-weight:800; }
+  section h2{ 
+    text-align:center; 
+    margin:0 0 22px; 
+    font-size: clamp(1.6rem, 3.3vw, 2.4rem); 
+    font-weight:800; 
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  section h2:hover {
+    transform: scale(1.05);
+    color: var(--gold);
+  }
   section p{ margin:0 auto; max-width:900px; line-height:1.6; font-size:1.06rem; }
-
   /* Recent posts grid */
   #posts-container{ display:grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:16px; }
   .post{
@@ -83,7 +86,6 @@
   .post h3{ margin:8px 0 6px; font-size:1.24rem; }
   .post p{ flex:1; opacity:.95; }
   .post small{ color:#ddd; }
-
   /* Products */
   .products-container{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; margin-top:14px; }
   .product, .recommended-product{ background:rgba(0,0,0,0.5); padding:15px; border-radius:14px; text-align:center; }
@@ -93,7 +95,6 @@
     background:var(--gold); color:#000;
   }
   .buy-btn:hover, .affiliate-btn:hover{ opacity:.85; }
-
   /* Control panel */
   #link-control-panel{
     text-align:center; padding:16px; margin:12px auto; max-width:820px;
@@ -105,7 +106,6 @@
   #link-control-panel button{
     padding:8px 12px; border:none; border-radius:8px; background:var(--gold); color:#000; font-weight:800; cursor:pointer;
   }
-
   /* Highlighted middle card (Show Productivity) */
   .productivity-section{
     background: linear-gradient(135deg, #f9f9f9, #eef3ff);
@@ -123,7 +123,6 @@
     background:#4a6cf7; color:#fff;
   }
   .cta-primary:hover{ opacity:.92; }
-
   /* Footer + ScrollTop */
   footer{ background: rgba(0,0,0,0.7); padding:20px; text-align:center; color:var(--gold); border-top:2px solid var(--gold); margin-top:30px; border-radius:16px; }
   footer a img{ filter:brightness(0) invert(1); }
@@ -133,7 +132,35 @@
     box-shadow:0 5px 15px rgba(0,0,0,.32);
   }
   #scrollTopBtn:hover{ background:var(--gold-2); }
-
+  /* Password input with eye icon */
+  .password-container {
+    position: relative;
+    width: 100%;
+  }
+  .password-container input {
+    width: 100%;
+    padding:10px; border-radius:8px; border:none; margin:5px 0;
+  }
+  .password-container i {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    color: #888;
+  }
+  .password-container i:hover {
+    color: var(--gold);
+  }
+  /* Remember password checkbox */
+  .remember-password {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    color: #ccc;
+  }
+  .remember-password input {
+    margin-right: 8px;
+  }
   /* Responsive */
   @media (max-width: 900px){
     nav{ display:none; }   /* use dropdown on mobile */
@@ -142,18 +169,15 @@
 </style>
 </head>
 <body>
-
 <!-- Language Selector -->
 <select class="language-select" id="language-select">
   <option value="en">English</option>
   <option value="si">සිංහල</option>
   <option value="ta">தமிழ்</option>
 </select>
-
 <header>
   <h1 id="page-name">Holistic Glow</h1>
 </header>
-
 <!-- Desktop Navigation -->
 <nav id="nav-bar">
   <a href="#health">Health & Wellness</a>
@@ -171,7 +195,6 @@
   <a href="#shop">Shop Our Products</a>
   <a href="#recommended-products">Recommended Products</a>
 </nav>
-
 <!-- Mobile Navigation Dropdown (dark) -->
 <select id="nav-select">
   <option value="#health">Health & Wellness</option>
@@ -190,20 +213,24 @@
   <option value="#recommended-products">Recommended Products</option>
 </select>
 
-<!-- Category Sections -->
-<section id="health"><h2>Health & Wellness</h2><p>Holistic health, fitness, nutrition, remedies.</p></section>
-<section id="selflove"><h2>Self Love & Mental Health</h2><p>Self-care, confidence, positivity, stress relief.</p></section>
-<section id="relationships"><h2>Relationships & Family</h2><p>Love, parenting, friendships, communication.</p></section>
-<section id="education"><h2>Education & Knowledge</h2><p>Learning, personal development, skill-building.</p></section>
-<section id="motivation"><h2>Motivation & Inspiration</h2><p>Success stories, quotes, personal growth.</p></section>
-<section id="spirituality"><h2>Spirituality & Law of Attraction</h2><p>Meditation, manifestation, energy healing.</p></section>
-<section id="lifestyle"><h2>Lifestyle & Daily Living</h2><p>Home, travel, culture, fashion, food.</p></section>
-<section id="finance"><h2>Finance & Career</h2><p>Money mindset, career advice, productivity.</p></section>
-<section id="trending"><h2>Trending & World News</h2><p>Global updates, social awareness.</p></section>
-<section id="nature"><h2>Nature & Environment</h2><p>Sustainability, natural living, eco-conscious habits.</p></section>
-<section id="technology"><h2>Technology & Innovation</h2><p>Digital health, AI in life, future trends.</p></section>
-<section id="community"><h2>Community Stories</h2><p>Real-life experiences, success journeys.</p></section>
+<!-- Recent Posts Section (moved to top) -->
+<section id="recent-posts"><h2 onclick="renderPosts('')">Recent Posts</h2>
+  <div id="posts-container"><!-- Add via admin panel --></div>
+</section>
 
+<!-- Category Sections -->
+<section id="health"><h2 onclick="renderPosts('health')">Health & Wellness</h2><p>Holistic health, fitness, nutrition, remedies.</p></section>
+<section id="selflove"><h2 onclick="renderPosts('selflove')">Self Love & Mental Health</h2><p>Self-care, confidence, positivity, stress relief.</p></section>
+<section id="relationships"><h2 onclick="renderPosts('relationships')">Relationships & Family</h2><p>Love, parenting, friendships, communication.</p></section>
+<section id="education"><h2 onclick="renderPosts('education')">Education & Knowledge</h2><p>Learning, personal development, skill-building.</p></section>
+<section id="motivation"><h2 onclick="renderPosts('motivation')">Motivation & Inspiration</h2><p>Success stories, quotes, personal growth.</p></section>
+<section id="spirituality"><h2 onclick="renderPosts('spirituality')">Spirituality & Law of Attraction</h2><p>Meditation, manifestation, energy healing.</p></section>
+<section id="lifestyle"><h2 onclick="renderPosts('lifestyle')">Lifestyle & Daily Living</h2><p>Home, travel, culture, fashion, food.</p></section>
+<section id="finance"><h2 onclick="renderPosts('finance')">Finance & Career</h2><p>Money mindset, career advice, productivity.</p></section>
+<section id="trending"><h2 onclick="renderPosts('trending')">Trending & World News</h2><p>Global updates, social awareness.</p></section>
+<section id="nature"><h2 onclick="renderPosts('nature')">Nature & Environment</h2><p>Sustainability, natural living, eco-conscious habits.</p></section>
+<section id="technology"><h2 onclick="renderPosts('technology')">Technology & Innovation</h2><p>Digital health, AI in life, future trends.</p></section>
+<section id="community"><h2 onclick="renderPosts('community')">Community Stories</h2><p>Real-life experiences, success journeys.</p></section>
 <!-- ⭐ Highlighted middle section: Show Productivity & Get Rewards -->
 <section class="productivity-section">
   <div class="productivity-card">
@@ -213,60 +240,73 @@
     <a id="submission-link-btn" href="#" class="cta-primary" target="_blank" onclick="return openSubmission()">Submit Now</a>
   </div>
 </section>
-
 <!-- Shop Products -->
 <section id="shop"><h2>Shop Our Products</h2>
   <div class="products-container" id="shop-products"><!-- Add via admin panel --></div>
 </section>
-
 <!-- Recommended Products -->
 <section id="recommended-products"><h2>Recommended Products</h2>
   <div class="products-container" id="recommended-products-container"><!-- Add via admin panel --></div>
 </section>
-
-<!-- Recent Posts -->
-<section id="recent-posts"><h2>Recent Posts</h2>
-  <div id="posts-container"><!-- Add via admin panel --></div>
-</section>
-
 <!-- Rewards Button -->
 <div style="text-align:center; margin:20px;">
   <button onclick="openRewards()" style="padding:10px 20px; background:var(--gold); color:#000; border:none; border-radius:8px; font-weight:800; cursor:pointer;">
     Click to Claim Rewards
   </button>
 </div>
-
 <!-- Social links -->
 <h3 style="margin-bottom:14px; text-align:center;">Connect with Us</h3>
 <div style="text-align:center;">
-  <a id="facebook-btn" href="#" target="_blank" style="margin:0 8px;"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" width="40" alt="Facebook"></a>
-  <a id="instagram-btn" href="#" target="_blank" style="margin:0 8px;"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="40" alt="Instagram"></a>
-  <a id="twitter-btn" href="#" target="_blank" style="margin:0 8px;"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" width="40" alt="Twitter"></a>
-  <a id="tiktok-btn" href="#" target="_blank" style="margin:0 8px;"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046127.png" width="40" alt="TikTok"></a>
+  <a id="facebook-btn" href="https://facebook.com/holisticglow" target="_blank" style="margin:0 8px;"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" width="40" alt="Facebook"></a>
+  <a id="instagram-btn" href="https://instagram.com/holisticglow" target="_blank" style="margin:0 8px;"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="40" alt="Instagram"></a>
+  <a id="twitter-btn" href="https://twitter.com/holisticglow" target="_blank" style="margin:0 8px;"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" width="40" alt="Twitter"></a>
+  <a id="tiktok-btn" href="https://tiktok.com/@holisticglow" target="_blank" style="margin:0 8px;"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046127.png" width="40" alt="TikTok"></a>
 </div>
-
 <!-- On-page Admin Panel -->
 <!-- Admin Login -->
 <section id="admin-login" style="padding:30px; background: rgba(0,0,0,0.6); margin:20px auto; border-radius:16px; max-width:400px; text-align:center;">
   <h2 style="color:var(--gold);">Admin Login</h2>
   <input type="text" id="admin-username" placeholder="Username" style="width:100%; padding:10px; border-radius:8px; border:none; margin:5px 0;">
-  <input type="password" id="admin-password" placeholder="Password" style="width:100%; padding:10px; border-radius:8px; border:none; margin:5px 0;">
+  <div class="password-container">
+    <input type="password" id="admin-password" placeholder="Password" style="width:100%; padding:10px; border-radius:8px; border:none; margin:5px 0;">
+    <i class="fas fa-eye" id="toggle-password"></i>
+  </div>
+  <div class="remember-password">
+    <input type="checkbox" id="remember-password">
+    <label for="remember-password">Remember password on this device</label>
+  </div>
   <button onclick="checkAdminLogin()" style="padding:10px 14px; background:var(--gold); color:#000; border:none; border-radius:8px; font-weight:800; cursor:pointer;">Login</button>
   <p id="admin-login-msg" style="color:red; margin-top:10px;"></p>
 </section>
-
 <section id="admin-panel" style="display:none;padding:30px; background: rgba(0,0,0,0.6); margin:20px auto; border-radius:16px; max-width:900px;">
   <h2 style="text-align:center; color:var(--gold);">Admin Panel</h2>
-
   <!-- Add Post -->
   <div style="margin-bottom:26px;">
     <h3>Add Recent Post</h3>
     <input id="post-title" placeholder="Post Title" style="width:100%; padding:10px; border-radius:8px; border:none; margin:5px 0;">
     <input id="post-image" placeholder="Image URL" style="width:100%; padding:10px; border-radius:8px; border:none; margin:5px 0;">
-    <textarea id="post-desc" placeholder="Post Description" style="width:100%; padding:10px; border-radius:8px; border:none; margin:5px 0;"></textarea>
+    <label for="post-description">Post Description:</label>
+<div id="post-description" contenteditable="true" 
+     style="border:1px solid #ccc; padding:10px; min-height:150px; width:100%; overflow:auto;">
+  Type your post here...
+</div>
+    <select id="post-topic" style="width:100%; padding:10px; border-radius:8px; border:none; margin:5px 0;">
+  <option value="">--Select Topic--</option>
+  <option value="health">Health & Wellness</option>
+  <option value="selflove">Self Love & Mental Health</option>
+  <option value="relationships">Relationships & Family</option>
+  <option value="education">Education & Knowledge</option>
+  <option value="motivation">Motivation & Inspiration</option>
+  <option value="spirituality">Spirituality & Law of Attraction</option>
+  <option value="lifestyle">Lifestyle & Daily Living</option>
+  <option value="finance">Finance & Career</option>
+  <option value="trending">Trending & World News</option>
+  <option value="nature">Nature & Environment</option>
+  <option value="technology">Technology & Innovation</option>
+  <option value="community">Community Stories</option>
+</select>
     <button onclick="addPost()" style="padding:10px 14px; background:var(--gold); color:#000; border:none; border-radius:8px; font-weight:800; cursor:pointer;">Add Post</button>
   </div>
-
   <!-- Add Shop Product -->
   <div style="margin-bottom:26px;">
     <h3>Add Shop Product</h3>
@@ -296,7 +336,6 @@
       <input id="submission-link-input" placeholder="https://your-google-form-or-portal.com" />
       <button onclick="updateSubmissionLink()">Update</button>
     </div>
-
     <!-- Add Recommended Product -->
     <div>
       <h3>Add Recommended Product</h3>
@@ -306,15 +345,35 @@
       <input id="rec-link" placeholder="Affiliate Link" style="width:100%; padding:10px; border-radius:8px; border:none; margin:5px 0;">
       <button onclick="addRecommendedProduct()" style="padding:10px 14px; background:var(--gold); color:#000; border:none; border-radius:8px; font-weight:800; cursor:pointer;">Add Recommended Product</button>
     </div>
-  </section>
-
+  </div>
+  
+  <!-- Add Social Media Links Section to Admin Panel -->
+  <div id="social-links-control" style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 12px;">
+    <h3 style="color:var(--gold);">Update Social Media Links</h3>
+    <div style="margin-bottom:10px;">
+      <b>Facebook:</b><br />
+      <input id="facebook-link-input" placeholder="https://facebook.com/yourpage" style="width:100%; padding:8px; border-radius:8px; border:none; margin:5px 0;">
+    </div>
+    <div style="margin-bottom:10px;">
+      <b>Instagram:</b><br />
+      <input id="instagram-link-input" placeholder="https://instagram.com/yourprofile" style="width:100%; padding:8px; border-radius:8px; border:none; margin:5px 0;">
+    </div>
+    <div style="margin-bottom:10px;">
+      <b>Twitter:</b><br />
+      <input id="twitter-link-input" placeholder="https://twitter.com/yourprofile" style="width:100%; padding:8px; border-radius:8px; border:none; margin:5px 0;">
+    </div>
+    <div style="margin-bottom:10px;">
+      <b>TikTok:</b><br />
+      <input id="tiktok-link-input" placeholder="https://tiktok.com/@yourprofile" style="width:100%; padding:8px; border-radius:8px; border:none; margin:5px 0;">
+    </div>
+    <button onclick="updateSocialLinks()" style="padding:10px 14px; background:var(--gold); color:#000; border:none; border-radius:8px; font-weight:800; cursor:pointer;">Update Social Links</button>
+  </div>
+</section>
 <!-- Footer -->
 <footer>
   <p>© 2025 Holistic Glow. All rights reserved.</p>
 </footer>
-
 <button id="scrollTopBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">&#8679;</button>
-
 <script>
 /* ===== Section Titles & Descriptions for multiple languages ===== */
 const sectionContent = {
@@ -353,23 +412,20 @@ const sectionContent = {
       lifestyle:{title:"வாழ்க்கை முறை மற்றும் தினசரி வாழ்க்கை",desc:"வீடு, பயணம், கலாச்சாரம், ஃபாஷன், உணவு."},
       finance:{title:"நிதி மற்றும் தொழில்",desc:"பண நிலைப்பாடு, தொழில் அறிவுரை, உற்பத்தித்திறன்."},
       trending:{title:"பிரபல மற்றும் உலக செய்திகள்",desc:"உலக தரவுகள், சமூக விழிப்புணர்வு."},
-      nature:{title:"ப природ மற்றும் சுற்றுச்சூழல்",desc:"நிலைத்தன்மை, இயற்கை வாழ்கை, சுற்றுச்சூழல் சிந்தனை."},
+      nature:{title:"இயற்கை மற்றும் சுற்றுச்சூழல்",desc:"நிலைத்தன்மை, இயற்கை வாழ்கை, சுற்றுச்சூழல் சிந்தனை."},
       technology:{title:"தொழில்நுட்பம் மற்றும் புதுமைகள்",desc:"டிஜிட்டல் ஆரோக்கியம், AI வாழ்க்கையில், எதிர்கால பரிமாணங்கள்."},
       community:{title:"சமூக கதைகள்",desc:"நிஜ வாழ்க்கை அனுபவங்கள், வெற்றிகரமான பயணங்கள்."}
   }
 };
-
 document.getElementById('language-select').addEventListener('change', function(){
   const lang = this.value;
-
   // Update <h1> page title
   const pageName = {
     en: "Holistic Glow",
     si: "හොලිස්ටික් ග්ලෝ",
-    ta: "ஹொலிஸ்டிக் க்லோ"
+    ta: "ஹொலிஸ்டிக் க்ளோ"
   };
   document.getElementById('page-name').textContent = pageName[lang];
-
   // Update section titles and descriptions
   Object.keys(sectionContent[lang]).forEach(id=>{
     const el = document.getElementById(id);
@@ -380,125 +436,445 @@ document.getElementById('language-select').addEventListener('change', function()
     }
   });
 });
-
 /* ===== Configurable links ===== */
 let earningLink    = "https://www.example.com";
 let rewardsLink    = "https://www.rewards.com";
 let submissionLink = "https://example.com/submit";
-
-function updateEarningLink(){ const v=document.getElementById('earning-link-input').value.trim(); if(v){ earningLink=v; alert("Earning link updated!"); document.getElementById('earning-link-input').value=''; }else alert("Please enter a valid URL."); }
-function updateRewardsLink(){ const v=document.getElementById('rewards-link-input').value.trim(); if(v){ rewardsLink=v; alert("Rewards link updated!"); document.getElementById('rewards-link-input').value=''; }else alert("Please enter a valid URL."); }
-function updateSubmissionLink(){ const v=document.getElementById('submission-link-input').value.trim(); if(v){ submissionLink=v; alert("Submission link updated!"); document.getElementById('submission-link-input').value=''; }else alert("Please enter a valid URL."); }
-
-function openRewards(){ if(rewardsLink) window.open(rewardsLink,'_blank'); else alert("Set your rewards link first."); }
-function openSubmission(){ if(!submissionLink || submissionLink === "#"){ alert("Set your submission link first (in the top control panel)."); return false; } window.open(submissionLink,'_blank'); return false; }
-
-/* ===== Auto-open earning link after any topic selection ===== */
-document.querySelectorAll("#nav-bar a").forEach(a=>{a.addEventListener('click', ()=>{setTimeout(()=>{if(earningLink) window.open(earningLink,'_blank');},3000);});});
-const mobileNav=document.getElementById('nav-select'); mobileNav.addEventListener('change', function(){ location.hash=this.value; setTimeout(()=>{if(earningLink) window.open(earningLink,'_blank');},3000); });
-
-/* ===== Scroll-to-top visibility ===== */
-window.addEventListener('scroll', ()=>{ document.getElementById('scrollTopBtn').style.display=((document.documentElement.scrollTop || document.body.scrollTop)>120) ? 'grid':'none'; });
-
-/* ===== Admin panel actions ===== */
-function clearVals(ids){ ids.forEach(id=>document.getElementById(id).value=''); }
-
-window.addPost = async function(){
-  const t = document.getElementById('post-title').value.trim();
-  const i = document.getElementById('post-image').value.trim();
-  const d = document.getElementById('post-desc').value.trim();
-  const topic = "recent"; // or let admin add a topic input if needed
-
-  if(!t || !i || !d){ alert("All fields are required for a post."); return; }
-
-  const postData = {title:t, image:i, desc:d, topic:topic};
-
-  try{
-    const res = await fetch("https://script.google.com/macros/s/AKfycbwmNuMYxvt0EaNCzd-yJ3EA6ohkgzILZg-tTp6wnDPwYVMI1TEW0CVETT7J6bwfL3o/exec", {
-      method:"POST",
-      body: JSON.stringify(postData),
-      headers: {"Content-Type":"application/json"}
+// Function to fetch data from Google Sheet
+function fetchFromSheet(type) {
+  return fetch(`https://script.google.com/macros/s/AKfycbyVNtTP7gegLepvqVfookVcaCkbFRmZ3iu6X1xwoogEQqJK5wYE4cGW5muE7L2CWOM/exec?type=${type}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === "success") {
+        return data.data;
+      } else {
+        console.error("Error fetching data:", data.message);
+        return [];
+      }
+    })
+    .catch(err => {
+      console.error("Error connecting to Google Sheet:", err);
+      return [];
     });
-    const result = await res.json();
-    if(result.status==="success"){
-      alert("Post added successfully!");
-      clearVals(['post-title','post-image','post-desc']);
-      renderPosts(); // refresh posts from Sheet
+}
+// Function to send data to Google Sheet
+function sendToSheet(data) {
+  return fetch("https://script.google.com/macros/s/AKfycbyVNtTP7gegLepvqVfookVcaCkbFRmZ3iu6X1xwoogEQqJK5wYE4cGW5muE7L2CWOM/exec", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" }
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.status === "success") {
+      return true;
     } else {
-      alert("Error: "+result.message);
+      console.error("Error saving data:", data.message);
+      return false;
     }
-  } catch(err){
-    alert("Failed to add post: "+err);
+  })
+  .catch(err => {
+    console.error("Error connecting to Google Sheet:", err);
+    return false;
+  });
+}
+function updateEarningLink(){ 
+  const v=document.getElementById('earning-link-input').value.trim(); 
+  if(v){ 
+    earningLink=v; 
+    // Save to Google Sheet
+    sendToSheet({type: "updateLink", linkType: "earning", url: v})
+      .then(success => {
+        if (success) {
+          alert("Earning link updated!");
+          document.getElementById('earning-link-input').value='';
+        } else {
+          alert("Failed to update earning link.");
+        }
+      });
+  } else alert("Please enter a valid URL."); 
+}
+function updateRewardsLink(){ 
+  const v=document.getElementById('rewards-link-input').value.trim(); 
+  if(v){ 
+    rewardsLink=v; 
+    // Save to Google Sheet
+    sendToSheet({type: "updateLink", linkType: "rewards", url: v})
+      .then(success => {
+        if (success) {
+          alert("Rewards link updated!");
+          document.getElementById('rewards-link-input').value='';
+        } else {
+          alert("Failed to update rewards link.");
+        }
+      });
+  } else alert("Please enter a valid URL."); 
+}
+function updateSubmissionLink(){
+  const v=document.getElementById('submission-link-input').value.trim();
+  if(v){
+    submissionLink=v;
+    // Save to Google Sheet
+    sendToSheet({type: "updateLink", linkType: "submission", url: v})
+      .then(success => {
+        if (success) {
+          alert("Submission link updated!");
+          document.getElementById('submission-link-input').value='';
+        } else {
+          alert("Failed to update submission link.");
+        }
+      });
+  } else {
+    alert("Please enter a valid URL.");
   }
-};
-
-
-window.addShopProduct=function(){
-  const t=document.getElementById('product-title').value.trim();
-  const i=document.getElementById('product-image').value.trim();
-  const d=document.getElementById('product-desc').value.trim();
-  const l=document.getElementById('product-link').value.trim();
-  if(!t||!i||!d||!l){ alert("All fields are required for a product."); return; }
-  const div=document.createElement('div'); div.className='product';
-  div.innerHTML=`<img src="${i}" alt="${t}"><h3>${t}</h3><p>${d}</p><a class="buy-btn" href="${l}" target="_blank">Buy Now</a>`;
-  document.getElementById('shop-products').prepend(div);
-  clearVals(['product-title','product-image','product-desc','product-link']);
 }
-
-window.addRecommendedProduct=function(){
-  const t=document.getElementById('rec-title').value.trim();
-  const i=document.getElementById('rec-image').value.trim();
-  const d=document.getElementById('rec-desc').value.trim();
-  const l=document.getElementById('rec-link').value.trim();
-  if(!t||!i||!d||!l){ alert("All fields are required for a recommended product."); return; }
-  const div=document.createElement('div'); div.className='recommended-product';
-  div.innerHTML=`<img src="${i}" alt="${t}"><h3>${t}</h3><p>${d}</p><ja class="affiliate-btn" href="${l}" target="_blank">Shop Now</a>`;
-  document.getElementById('recommended-products-container').prepend(div);
-  clearVals(['rec-title','rec-image','rec-desc','rec-link']);
+// Rewards function
+function openRewards(){
+  if(rewardsLink){
+    window.open(rewardsLink, "_blank");
+  } else {
+    alert("Rewards link not set!");
+  }
 }
+// Submission function
+function openSubmission(){
+  if(submissionLink){
+    window.open(submissionLink, "_blank");
+  } else {
+    alert("Submission link not set!");
+  }
+  return false; // Prevent default link behavior
+}
+/* ===== Auto-open earning link after any topic selection ===== */
+// Desktop nav click
+document.querySelectorAll("#nav-bar a").forEach(a=>{
+  a.addEventListener('click', ()=>{
+    const topic = a.getAttribute('href').substring(1);
+    renderPosts(topic); // filter by topic
+    setTimeout(()=>{if(earningLink) window.open(earningLink,'_blank');},3000);
+  });
+});
+// Mobile nav change
+const mobileNav = document.getElementById('nav-select');
+mobileNav.addEventListener('change', function(){
+  const topic = this.value.substring(1);
+  renderPosts(topic);
+  location.hash=this.value;
+  setTimeout(()=>{if(earningLink) window.open(earningLink,'_blank');},3000);
+});
+// Array to store posts locally
+let posts = [];
+// Function to clear input field values
+function clearVals(ids){ 
+  ids.forEach(id=>document.getElementById(id).value=''); 
+}
+// Function to render posts based on topic
+function renderPosts(filterTopic = "") {
+  const container = document.getElementById('posts-container');
+  container.innerHTML = ""; // clear previous posts
+  
+  // Filter posts if a topic is selected
+  const filtered = filterTopic ? posts.filter(p => p.topic === filterTopic) : posts;
+  
+  filtered.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'post';
+    
+    // "Read More" for long descriptions
+    const MAX_LENGTH = 200;
+    let content = p.desc;
+    let readMore = '';
+    if (content.length > MAX_LENGTH) {
+      readMore = `<span class="dots" style="display:none;">${content.slice(MAX_LENGTH)}</span>
+                  <a href="#" onclick="this.previousElementSibling.style.display='inline';this.style.display='none'; return false;"> Read More</a>`;
+      content = content.slice(0, MAX_LENGTH);
+    }
+    
+    div.innerHTML = `
+      <img src="${p.image}" alt="${p.title}">
+      <h3>${p.title}</h3>
+      <p>${content}${readMore}</p>
+      <small>${p.date}</small>
+    `;
+    container.appendChild(div);
+  });
+  
+  // Scroll to posts container
+  container.scrollIntoView({ behavior: 'smooth' });
+}
+/* ===== Scroll-to-top visibility ===== */
+window.addEventListener('scroll', ()=>{ 
+  document.getElementById('scrollTopBtn').style.display=((document.documentElement.scrollTop || document.body.scrollTop)>120) ? 'grid':'none'; 
+});
+/* ===== Admin panel actions ===== */
 // Admin credentials
 const ADMIN_USERNAME = "ASHWINIII";
 const ADMIN_PASSWORD = "PW123456";
-
 function checkAdminLogin() {
   const username = document.getElementById('admin-username').value.trim();
   const password = document.getElementById('admin-password').value.trim();
+  const rememberMe = document.getElementById('remember-password').checked;
   
   if(username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
     // Hide login form
     document.getElementById('admin-login').style.display = 'none';
     // Show admin panel
     document.getElementById('admin-panel').style.display = 'block';
+    // Load current data into admin panel
+    loadAdminData();
+    
+    // Save credentials if remember me is checked
+    if (rememberMe) {
+      localStorage.setItem('adminUsername', username);
+      localStorage.setItem('adminPassword', password);
+    } else {
+      localStorage.removeItem('adminUsername');
+      localStorage.removeItem('adminPassword');
+    }
   } else {
     document.getElementById('admin-login-msg').textContent = "Invalid username or password!";
   }
 }
-
-async function renderPosts(topic=null){
-  const container = document.getElementById('posts-container');
-  container.innerHTML = "";
-  try{
-    const res = await fetch("YOUR_WEB_APP_URL_HERE");
-    let posts = await res.json();
-    if(topic) posts = posts.filter(p=>p.topic===topic);
-
-    posts.reverse().forEach(p=>{
-      const div = document.createElement('div'); div.className='post';
-      div.innerHTML=`<img src="${p.image}" alt="${p.title}"><h3>${p.title}</h3><p>${p.desc}</p><small>${new Date(p.date).toLocaleDateString()}</small>`;
+// Load current data into admin panel
+function loadAdminData() {
+  // Load current links
+  document.getElementById('earning-link-input').value = earningLink;
+  document.getElementById('rewards-link-input').value = rewardsLink;
+  document.getElementById('submission-link-input').value = submissionLink;
+}
+// New addPost function
+window.addPost = function() {
+  const title = document.getElementById('post-title').value.trim();
+  const image = document.getElementById('post-image').value.trim();
+  const desc = document.getElementById('post-description').innerHTML.trim(); // keep formatting
+  const topic = document.getElementById('post-topic').value;
+  const date = new Date().toLocaleDateString();
+  
+  if (!title || !image || !desc || !topic) {
+    alert("All fields are required for a post.");
+    return;
+  }
+  
+  const postObj = { 
+    type: "post",
+    title, 
+    image, 
+    desc, 
+    topic, 
+    date 
+  };
+  
+  // Add to local array for immediate display
+  posts.push(postObj);
+  renderPosts();
+  
+  // Send to Google Sheet
+  sendToSheet(postObj)
+    .then(success => {
+      if (success) {
+        alert("Post added to Google Sheet successfully!");
+        // Clear form fields
+        clearVals(['post-title','post-image']);
+        document.getElementById('post-description').innerHTML = "";
+      } else {
+        alert("Error saving post to Google Sheet.");
+      }
+    });
+}
+// Add shop product function
+window.addShopProduct = function() {
+  const t = document.getElementById('product-title').value.trim();
+  const i = document.getElementById('product-image').value.trim();
+  const d = document.getElementById('product-desc').value.trim();
+  const l = document.getElementById('product-link').value.trim();
+  if (!t || !i || !d || !l) { 
+    alert("All fields are required for a product."); 
+    return; 
+  }
+  
+  const productObj = {
+    type: "shopProduct",
+    title: t,
+    image: i,
+    desc: d,
+    link: l
+  };
+  
+  // Add to DOM
+  const div = document.createElement('div'); 
+  div.className = 'product';
+  div.innerHTML = `<img src="${i}" alt="${t}"><h3>${t}</h3><p>${d}</p><a class="buy-btn" href="${l}" target="_blank">Buy Now</a>`;
+  document.getElementById('shop-products').prepend(div);
+  
+  // Send to Google Sheet
+  sendToSheet(productObj)
+    .then(success => {
+      if (success) {
+        alert("Shop product added to Google Sheet successfully!");
+        clearVals(['product-title','product-image','product-desc','product-link']);
+      } else {
+        alert("Error saving shop product to Google Sheet.");
+      }
+    });
+}
+// Add recommended product function
+window.addRecommendedProduct = function() {
+  const t = document.getElementById('rec-title').value.trim();
+  const i = document.getElementById('rec-image').value.trim();
+  const d = document.getElementById('rec-desc').value.trim();
+  const l = document.getElementById('rec-link').value.trim();
+  if (!t || !i || !d || !l) { 
+    alert("All fields are required for a recommended product."); 
+    return; 
+  }
+  
+  const productObj = {
+    type: "recommendedProduct",
+    title: t,
+    image: i,
+    desc: d,
+    link: l
+  };
+  
+  // Add to DOM
+  const div = document.createElement('div');
+  div.className = 'recommended-product';
+  div.innerHTML = `
+    <img src="${i}" alt="${t}">
+    <h3>${t}</h3>
+    <p>${d}</p>
+    <a class="affiliate-btn" href="${l}" target="_blank">Buy Now</a>
+  `;
+  document.getElementById('recommended-products-container').prepend(div);
+  
+  // Send to Google Sheet
+  sendToSheet(productObj)
+    .then(success => {
+      if (success) {
+        alert("Recommended product added to Google Sheet successfully!");
+        clearVals(['rec-title', 'rec-image', 'rec-desc', 'rec-link']);
+      } else {
+        alert("Error saving recommended product to Google Sheet.");
+      }
+    });
+}
+// Load data from Google Sheets on page load
+function loadDataFromSheets() {
+  // Load posts
+  fetchFromSheet("posts").then(data => {
+    posts = data;
+    renderPosts();
+  });
+  
+  // Load shop products
+  fetchFromSheet("shopProducts").then(data => {
+    const container = document.getElementById('shop-products');
+    container.innerHTML = ''; // clear existing
+    data.forEach(product => {
+      const div = document.createElement('div');
+      div.className = 'product';
+      div.innerHTML = `<img src="${product.image}" alt="${product.title}"><h3>${product.title}</h3><p>${product.desc}</p><a class="buy-btn" href="${product.link}" target="_blank">Buy Now</a>`;
       container.appendChild(div);
     });
-  } catch(err){
-    container.innerHTML="<p>Failed to load posts.</p>";
-    console.error(err);
-  }
+  });
+  
+  // Load recommended products
+  fetchFromSheet("recommendedProducts").then(data => {
+    const container = document.getElementById('recommended-products-container');
+    container.innerHTML = ''; // clear existing
+    data.forEach(product => {
+      const div = document.createElement('div');
+      div.className = 'recommended-product';
+      div.innerHTML = `
+        <img src="${product.image}" alt="${product.title}">
+        <h3>${product.title}</h3>
+        <p>${product.desc}</p>
+        <a class="affiliate-btn" href="${product.link}" target="_blank">Buy Now</a>
+      `;
+      container.appendChild(div);
+    });
+  });
+  
+  // Load social media links
+  fetchFromSheet("socialLinks").then(data => {
+    if (data.length > 0) {
+      document.getElementById('facebook-btn').href = data[0].facebook || '#';
+      document.getElementById('instagram-btn').href = data[0].instagram || '#';
+      document.getElementById('twitter-btn').href = data[0].twitter || '#';
+      document.getElementById('tiktok-btn').href = data[0].tiktok || '#';
+    }
+  });
+  
+  // Load configurable links
+  fetchFromSheet("configLinks").then(data => {
+    if (data.length > 0) {
+      data.forEach(link => {
+        if (link.linkType === "earning") earningLink = link.url;
+        if (link.linkType === "rewards") rewardsLink = link.url;
+        if (link.linkType === "submission") submissionLink = link.url;
+      });
+    }
+  });
 }
 
-// Load posts on page load
-window.addEventListener('load', ()=>renderPosts());
+// Add social media links update functionality
+function updateSocialLinks() {
+  const facebook = document.getElementById('facebook-link-input').value.trim();
+  const instagram = document.getElementById('instagram-link-input').value.trim();
+  const twitter = document.getElementById('twitter-link-input').value.trim();
+  const tiktok = document.getElementById('tiktok-link-input').value.trim();
+  
+  const socialLinksObj = {
+    type: "socialLinks",
+    facebook,
+    instagram,
+    twitter,
+    tiktok
+  };
+  
+  sendToSheet(socialLinksObj)
+    .then(success => {
+      if (success) {
+        alert("Social links updated successfully!");
+        // Update the actual links on the page
+        document.getElementById('facebook-btn').href = facebook || '#';
+        document.getElementById('instagram-btn').href = instagram || '#';
+        document.getElementById('twitter-btn').href = twitter || '#';
+        document.getElementById('tiktok-btn').href = tiktok || '#';
+        // Clear form fields
+        clearVals(['facebook-link-input', 'instagram-link-input', 'twitter-link-input', 'tiktok-link-input']);
+      } else {
+        alert("Error updating social links.");
+      }
+    });
+}
 
+// Toggle password visibility
+document.getElementById('toggle-password').addEventListener('click', function() {
+  const passwordInput = document.getElementById('admin-password');
+  const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+  passwordInput.setAttribute('type', type);
+  
+  // Toggle the eye icon
+  this.classList.toggle('fa-eye');
+  this.classList.toggle('fa-eye-slash');
+});
 
+// Load saved credentials on page load
+window.addEventListener('load', function() {
+  // Load saved credentials if any
+  const savedUsername = localStorage.getItem('adminUsername');
+  const savedPassword = localStorage.getItem('adminPassword');
+  
+  if (savedUsername && savedPassword) {
+    document.getElementById('admin-username').value = savedUsername;
+    document.getElementById('admin-password').value = savedPassword;
+    document.getElementById('remember-password').checked = true;
+  }
+  
+  // Load data from Google Sheets
+  loadDataFromSheets();
+});
 </script>
 </body>
 </html>
-index.html
-Displaying index.html.
