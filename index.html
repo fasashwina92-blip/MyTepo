@@ -197,13 +197,15 @@
   }
   .image-upload-button {
     display: inline-block;
-    padding: 8px 12px;
+    padding: 12px 16px;
     background: var(--gold);
     color: var(--dark);
     border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
     margin-bottom: 10px;
+    min-height: 48px;
+    font-size: 16px;
   }
   .image-upload-button:hover {
     opacity: 0.9;
@@ -245,6 +247,56 @@
     margin-top: 10px;
     display: none;
   }
+  /* PDF Viewer Styles */
+  .pdf-container {
+    margin-top: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.3);
+  }
+  .pdf-viewer {
+    width: 100%;
+    height: 300px;
+    border: none;
+  }
+  .pdf-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--gold);
+    color: var(--dark);
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .pdf-link:hover {
+    opacity: 0.9;
+  }
+  /* Mobile upload improvements */
+  button[onclick="addPost()"],
+  button[onclick="addShopProduct()"],
+  button[onclick="addRecommendedProduct()"] {
+    padding: 12px 16px;
+    font-size: 16px;
+    min-height: 48px;
+    width: 100%;
+  }
+  
+  .loading-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-left: 8px;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
   /* Responsive */
   @media (max-width: 900px){
     nav{ display:none; }   /* use dropdown on mobile */
@@ -296,12 +348,10 @@
   <option value="#shop">Shop Our Products</option>
   <option value="#recommended-products">Recommended Products</option>
 </select>
-
 <!-- Recent Posts Section (moved to top) -->
 <section id="recent-posts"><h2 onclick="renderPosts('')">Recent Posts</h2>
   <div id="posts-container"><!-- Add via admin panel --></div>
 </section>
-
 <!-- Category Sections -->
 <section id="health"><h2 onclick="renderPosts('health')">Health & Wellness</h2><p>Holistic health, fitness, nutrition, remedies.</p></section>
 <section id="selflove"><h2 onclick="renderPosts('selflove')">Self Love & Mental Health</h2><p>Self-care, confidence, positivity, stress relief.</p></section>
@@ -388,7 +438,7 @@
     
     <label for="post-description">Post Description:</label>
 <div id="post-description" contenteditable="true" 
-     style="border:1px solid #ccc; padding:10px; min-height:150px; width:100%; overflow:auto;">
+     style="border:1px solid #ccc; padding:10px; min-height:150px; width:100%; overflow:auto; background: rgba(255,255,255,0.1); color: #fff;">
   Type your post here...
 </div>
     <select id="post-topic" style="width:100%; padding:10px; border-radius:8px; border:none; margin:5px 0;">
@@ -534,7 +584,7 @@ const sectionContent = {
       education:{title:"கல்வி மற்றும் அறிவு",desc:"கற்றல், தனிப்பட்ட வளர்ச்சி, திறன் மேம்பாடு."},
       motivation:{title:"தூண்டுதல் மற்றும் ஊக்கமளிப்பு",desc:"வெற்றி கதைகள், மேற்கோள்கள், தனிப்பட்ட வளர்ச்சி."},
       spirituality:{title:"ஆன்மிகம் மற்றும் ஈர்ப்பு விதி",desc:"தியானம், கற்பனை, சக்தி சிகிச்சை."},
-      lifestyle:{title:"வாழ்க்கை முறை மற்றும் தினசரி வாழ்க்கை",desc:"வீடு, பயணம், கலாச்சாரம், ஃ�ாஷன், உணவு."},
+      lifestyle:{title:"வாழ்க்கை முறை மற்றும் தினசரி வாழ்க்கை",desc:"வீடு, பயணம், கலாச்சாரம், ஃபாஷன், உணவு."},
       finance:{title:"நிதி மற்றும் தொழில்",desc:"பண நிலைப்பாடு, தொழில் அறிவுரை, உற்பத்தித்திறன்."},
       trending:{title:"பிரபல மற்றும் உலக செய்திகள்",desc:"உலக தரவுகள், சமூக விழிப்புணர்வு."},
       nature:{title:"இயற்கை மற்றும் சுற்றுச்சூழல்",desc:"நிலைத்தன்மை, இயற்கை வாழ்கை, சுற்றுச்சூழல் சிந்தனை."},
@@ -584,23 +634,34 @@ function fetchFromSheet(type) {
 }
 // Function to send data to Google Sheet
 function sendToSheet(data) {
+  // Add timeout handling for mobile networks
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+  
   return fetch("https://script.google.com/macros/s/AKfycbyVNtTP7gegLepvqVfookVcaCkbFRmZ3iu6X1xwoogEQqJK5wYE4cGW5muE7L2CWOM/exec", {
     method: "POST",
     body: JSON.stringify(data),
-    headers: { "Content-Type": "application/json" }
+    headers: { "Content-Type": "application/json" },
+    signal: controller.signal
   })
-  .then(res => res.json())
+  .then(res => {
+    clearTimeout(timeoutId);
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    return res.json();
+  })
   .then(data => {
     if (data.status === "success") {
       return true;
     } else {
-      console.error("Error saving data:", data.message);
-      return false;
+      throw new Error(data.message || "Unknown error");
     }
   })
   .catch(err => {
+    clearTimeout(timeoutId);
     console.error("Error connecting to Google Sheet:", err);
-    return false;
+    throw err; // Re-throw to handle in the calling function
   });
 }
 function updateEarningLink(){ 
@@ -712,6 +773,8 @@ function renderPosts(filterTopic = "") {
     const contentDiv = document.createElement('div');
     contentDiv.className = 'post-content truncated';
     contentDiv.id = postId + '-content';
+    
+    // Fix: Use innerHTML to preserve formatting
     contentDiv.innerHTML = p.desc;
     
     // Create read more link
@@ -733,11 +796,20 @@ function renderPosts(filterTopic = "") {
       }
     };
     
-    div.innerHTML = `
-      <img src="${p.image}" alt="${p.title}">
-      <h3>${p.title}</h3>
-    `;
+    // Add image if it exists
+    if (p.image) {
+      const img = document.createElement('img');
+      img.src = p.image;
+      img.alt = p.title;
+      div.appendChild(img);
+    }
     
+    // Add title
+    const title = document.createElement('h3');
+    title.textContent = p.title;
+    div.appendChild(title);
+    
+    // Add content
     div.appendChild(contentDiv);
     div.appendChild(readMoreLink);
     
@@ -814,11 +886,60 @@ function showSuccess(message) {
     successElement.style.display = 'none';
   }, 5000);
 }
-// New addPost function
+// Image upload functionality
+function setupImageUpload(uploadId, previewId, statusId, inputId) {
+  const uploadInput = document.getElementById(uploadId);
+  const preview = document.getElementById(previewId);
+  const status = document.getElementById(statusId);
+  const hiddenInput = document.getElementById(inputId);
+  
+  uploadInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      // Check file size (limit to 500KB for mobile)
+      if (file.size > 500 * 1024) {
+        status.textContent = 'File is too large. Maximum size is 500KB.';
+        status.style.color = '#ff6b6b';
+        return;
+      }
+      
+      // Check file type
+      if (!file.type.match('image.*')) {
+        status.textContent = 'Please select an image file.';
+        status.style.color = '#ff6b6b';
+        return;
+      }
+      
+      // Show upload progress
+      status.textContent = 'Uploading...';
+      status.style.color = '#FFD700';
+      
+      // Read the file
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        // Convert to base64
+        const base64 = e.target.result;
+        
+        // Show preview
+        preview.src = base64;
+        preview.style.display = 'block';
+        
+        // Set the hidden input value
+        hiddenInput.value = base64;
+        
+        // Show status
+        status.textContent = 'Image uploaded successfully!';
+        status.style.color = '#4caf50';
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}
+// New addPost function with proper HTML handling
 window.addPost = function() {
   const title = document.getElementById('post-title').value.trim();
   const image = document.getElementById('post-image').value.trim();
-  const desc = document.getElementById('post-description').innerHTML.trim(); // keep formatting
+  const desc = document.getElementById('post-description').innerHTML.trim(); // Use innerHTML to preserve formatting
   const topic = document.getElementById('post-topic').value;
   const date = new Date().toLocaleDateString();
   
@@ -828,8 +949,8 @@ window.addPost = function() {
   }
   
   // Check if image is base64 (too large for Google Sheets)
-  if (image.startsWith('data:image') && image.length > 50000) {
-    showError("Image is too large. Please use a smaller image (less than 50KB).");
+  if (image.startsWith('data:image') && image.length > 1000000) { // Increased limit
+    showError("Image is too large. Please use a smaller image (less than 1MB).");
     return;
   }
   
@@ -874,8 +995,8 @@ window.addShopProduct = function() {
   }
   
   // Check if image is base64 (too large for Google Sheets)
-  if (i.startsWith('data:image') && i.length > 50000) {
-    showError("Image is too large. Please use a smaller image (less than 50KB).");
+  if (i.startsWith('data:image') && i.length > 1000000) {
+    showError("Image is too large. Please use a smaller image (less than 1MB).");
     return;
   }
   
@@ -919,8 +1040,8 @@ window.addRecommendedProduct = function() {
   }
   
   // Check if image is base64 (too large for Google Sheets)
-  if (i.startsWith('data:image') && i.length > 50000) {
-    showError("Image is too large. Please use a smaller image (less than 50KB).");
+  if (i.startsWith('data:image') && i.length > 1000000) {
+    showError("Image is too large. Please use a smaller image (less than 1MB).");
     return;
   }
   
@@ -1015,7 +1136,6 @@ function loadDataFromSheets() {
     }
   });
 }
-
 // Add social media links update functionality
 function updateSocialLinks() {
   const facebook = document.getElementById('facebook-link-input').value.trim();
@@ -1047,7 +1167,6 @@ function updateSocialLinks() {
       }
     });
 }
-
 // Toggle password visibility
 document.getElementById('toggle-password').addEventListener('click', function() {
   const passwordInput = document.getElementById('admin-password');
@@ -1058,62 +1177,12 @@ document.getElementById('toggle-password').addEventListener('click', function() 
   this.classList.toggle('fa-eye');
   this.classList.toggle('fa-eye-slash');
 });
-
-// Image upload functionality
-function setupImageUpload(uploadId, previewId, statusId, inputId) {
-  const uploadInput = document.getElementById(uploadId);
-  const preview = document.getElementById(previewId);
-  const status = document.getElementById(statusId);
-  const hiddenInput = document.getElementById(inputId);
-  
-  uploadInput.addEventListener('change', function() {
-    const file = this.files[0];
-    if (file) {
-      // Check file size (limit to 50KB to fit in Google Sheets)
-      if (file.size > 50 * 1024) {
-        status.textContent = 'File is too large. Maximum size is 50KB.';
-        status.style.color = '#ff6b6b';
-        return;
-      }
-      
-      // Check file type
-      if (!file.type.match('image.*')) {
-        status.textContent = 'Please select an image file.';
-        status.style.color = '#ff6b6b';
-        return;
-      }
-      
-      // Read the file
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        // Convert to base64
-        const base64 = e.target.result;
-        
-        // Show preview
-        preview.src = base64;
-        preview.style.display = 'block';
-        
-        // Set the hidden input value
-        hiddenInput.value = base64;
-        
-        // Show status
-        status.textContent = 'Image uploaded successfully!';
-        status.style.color = '#4caf50';
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-}
-
 // Setup image upload for posts
 setupImageUpload('post-image-upload', 'post-image-preview', 'post-image-status', 'post-image');
-
 // Setup image upload for shop products
 setupImageUpload('product-image-upload', 'product-image-preview', 'product-image-status', 'product-image');
-
 // Setup image upload for recommended products
 setupImageUpload('rec-image-upload', 'rec-image-preview', 'rec-image-status', 'rec-image');
-
 // Load saved credentials on page load
 window.addEventListener('load', function() {
   // Load saved credentials if any
