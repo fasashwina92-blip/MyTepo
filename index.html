@@ -1,7 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="google-site-verification" content="qnWyRNaO_aX5QXU9htOsYqgXNo5PB1LtRPdvi8XNcVg" />
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Holistic Glow</title>
@@ -403,16 +403,35 @@ window.addEventListener('scroll', ()=>{ document.getElementById('scrollTopBtn').
 /* ===== Admin panel actions ===== */
 function clearVals(ids){ ids.forEach(id=>document.getElementById(id).value=''); }
 
-window.addPost=function(){
-  const t=document.getElementById('post-title').value.trim();
-  const i=document.getElementById('post-image').value.trim();
-  const d=document.getElementById('post-desc').value.trim();
-  if(!t||!i||!d){alert("All fields are required for a post."); return;}
-  const div=document.createElement('div'); div.className='post';
-  div.innerHTML=`<img src="${i}" alt="${t}"><h3>${t}</h3><p>${d}</p><small>${new Date().toLocaleDateString()}</small>`;
-  document.getElementById('posts-container').prepend(div);
-  clearVals(['post-title','post-image','post-desc']);
-}
+window.addPost = async function(){
+  const t = document.getElementById('post-title').value.trim();
+  const i = document.getElementById('post-image').value.trim();
+  const d = document.getElementById('post-desc').value.trim();
+  const topic = "recent"; // or let admin add a topic input if needed
+
+  if(!t || !i || !d){ alert("All fields are required for a post."); return; }
+
+  const postData = {title:t, image:i, desc:d, topic:topic};
+
+  try{
+    const res = await fetch("https://script.google.com/macros/s/AKfycbwmNuMYxvt0EaNCzd-yJ3EA6ohkgzILZg-tTp6wnDPwYVMI1TEW0CVETT7J6bwfL3o/exec", {
+      method:"POST",
+      body: JSON.stringify(postData),
+      headers: {"Content-Type":"application/json"}
+    });
+    const result = await res.json();
+    if(result.status==="success"){
+      alert("Post added successfully!");
+      clearVals(['post-title','post-image','post-desc']);
+      renderPosts(); // refresh posts from Sheet
+    } else {
+      alert("Error: "+result.message);
+    }
+  } catch(err){
+    alert("Failed to add post: "+err);
+  }
+};
+
 
 window.addShopProduct=function(){
   const t=document.getElementById('product-title').value.trim();
@@ -455,6 +474,31 @@ function checkAdminLogin() {
   }
 }
 
+async function renderPosts(topic=null){
+  const container = document.getElementById('posts-container');
+  container.innerHTML = "";
+  try{
+    const res = await fetch("YOUR_WEB_APP_URL_HERE");
+    let posts = await res.json();
+    if(topic) posts = posts.filter(p=>p.topic===topic);
+
+    posts.reverse().forEach(p=>{
+      const div = document.createElement('div'); div.className='post';
+      div.innerHTML=`<img src="${p.image}" alt="${p.title}"><h3>${p.title}</h3><p>${p.desc}</p><small>${new Date(p.date).toLocaleDateString()}</small>`;
+      container.appendChild(div);
+    });
+  } catch(err){
+    container.innerHTML="<p>Failed to load posts.</p>";
+    console.error(err);
+  }
+}
+
+// Load posts on page load
+window.addEventListener('load', ()=>renderPosts());
+
+
 </script>
 </body>
 </html>
+index.html
+Displaying index.html.
