@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nutrition for Balanced Living - Holistic Glow</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  :root{
+    --gold:#FFD700;
+    --gold-2:#FFA500;
+    --gold-3:#FFC107;
+    --dark:#0f0f10;
+    --glass: rgba(0,0,0,0.5);
+    --light-glass: rgba(255,255,255,0.1);
+    --accent: #4a6cf7;
+    --purple: #9d4edd;
+    --pink: #c77dff;
+    --blue: #7209b7;
+    --teal: #4cc9f0;
+    --green: #06ffa5;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{font-family:'Montserrat',sans-serif; color:#fff; scroll-behavior:smooth; overflow-x:hidden;}
+  body{
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
+    background-size:cover;
+    position: relative;
+  }
+  
+  /* Animated background particles */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 20%),
+      radial-gradient(circle at 90% 80%, rgba(255, 165, 0, 0.05) 0%, transparent 20%),
+      radial-gradient(circle at 50% 50%, rgba(74, 108, 247, 0.03) 0%, transparent 50%);
+    z-index: -1;
+    animation: float 20s infinite linear;
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-20px) rotate(1deg); }
+  }
+  
+  /* Header / Title */
+  header{ 
+    text-align:center; 
+    padding:40px 20px; 
+    background: linear-gradient(135deg, var(--glass) 0%, rgba(0,0,0,0.7) 100%);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+    animation: pulse 8s infinite alternate;
+    z-index: -1;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(0.8); opacity: 0.3; }
+    100% { transform: scale(1.2); opacity: 0.1; }
+  }
+  
+  header h1{
+    margin:0;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--gold);
+    position: relative;
+    display: inline-block;
+  }
+  
+  header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  
+  /* Language dropdown */
+  .language-select{
+    position:absolute; top:20px; right:20px; z-index:10;
+    padding:10px 15px; border-radius:8px; border:1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.7); color:#fff; font-weight:600; cursor:pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+  }
+  
+  .language-select:hover {
+    background: rgba(255,215,0,0.2);
+    border-color: var(--gold);
+  }
+  
+  /* Nav */
+  nav{
+    position:sticky; top:0; z-index:8;
+    display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+    padding:15px; background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  
+  nav a{
+    color:#fff; text-decoration:none; font-weight:600;
+    padding:10px 16px; border-radius:8px; transition:all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  nav a:hover::before {
+    left: 100%;
+  }
+  
+  nav a:hover{ 
+    background: rgba(255,255,255,0.15); 
+    transform: translateY(-2px);
+  }
+  
+  nav a.active{ 
+    background: linear-gradient(90deg,var(--gold),var(--gold-2)); 
+    color:#000;
+    box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+  }
+  
+  /* Mobile topic dropdown (dark) */
+  #nav-select{
+    display:none; width:92%; margin:15px auto 0;
+    padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.75); color:#fff; font-weight:600;
+  }
+  
+  /* Post Container */
+  .post-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+  
+  .post-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .post-page-title {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    color: var(--gold);
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+  
+  .post-page-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  
+  .post-page-content {
+    background: linear-gradient(135deg, var(--glass) 0%, rgba(0,0,0,0.6) 100%);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  
+  .post-page-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+  
+  .post-page-text h3 {
+    color: var(--gold);
+    margin: 25px 0 15px;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .post-page-text ul {
+    margin: 15px 0;
+    padding-left: 20px;
+  }
+  
+  .post-page-text li {
+    margin-bottom: 10px;
+  }
+  
+  .post-page-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+  }
+  
+  .back-to-posts {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-2));
+    color: var(--dark);
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+  }
+  
+  .back-to-posts:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255,215,0,0.4);
+  }
+  
+  .back-to-posts i {
+    margin-right: 8px;
+  }
+  
+  /* Footer + ScrollTop */
+  footer{ 
+    background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
+    padding:30px 20px; 
+    text-align:center; 
+    color:var(--gold); 
+    border-top:2px solid var(--gold); 
+    margin-top:40px; 
+    border-radius:20px 20px 0 0;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+  }
+  
+  footer p {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  
+  #scrollTopBtn{
+    position:fixed; 
+    right:30px; 
+    bottom:30px; 
+    z-index:30; 
+    display:none;
+    background:linear-gradient(135deg, var(--gold), var(--gold-2)); 
+    color:#000; 
+    border:none; 
+    width:50px; 
+    height:50px; 
+    border-radius:50%; 
+    font-size:20px; 
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(0,0,0,.32);
+    transition: all 0.3s ease;
+  }
+  
+  #scrollTopBtn:hover{ 
+    background:var(--gold-2);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  }
+  
+  /* Responsive */
+  @media (max-width: 900px){
+    nav{ display:none; }   /* use dropdown on mobile */
+    #nav-select{ display:block; }
+    
+    .post-page-image {
+      height: 300px;
+    }
+    
+    header {
+      padding: 30px 15px;
+    }
+    
+    header h1 {
+      font-size: clamp(1.8rem, 5vw, 2.2rem);
+    }
+  }
+</style>
+</head>
+<body>
+<!-- Language Selector -->
+<select class="language-select" id="language-select" onchange="handleLanguageChange(this.value)">
+  <option value="en">English</option>
+  <option value="si">සිංහල</option>
+  <option value="ta">தமிழ்</option>
+</select>
+<header>
+  <h1>Nutrition for Balanced Living</h1>
+</header>
+<!-- Desktop Navigation -->
+<nav id="nav-bar">
+  <a href="index.html">Home</a>
+  <a href="health.html" class="active">Health & Wellness</a>
+  <a href="selflove.html">Self Love & Mental Health</a>
+  <a href="relationships.html">Relationships & Family</a>
+  <a href="education.html">Education & Knowledge</a>
+  <a href="motivation.html">Motivation & Inspiration</a>
+  <a href="spirituality.html">Spirituality & Law of Attraction</a>
+  <a href="lifestyle.html">Lifestyle & Daily Living</a>
+  <a href="finance.html">Finance & Career</a>
+  <a href="trending.html">Trending & World News</a>
+  <a href="nature.html">Nature & Environment</a>
+  <a href="technology.html">Technology & Innovation</a>
+  <a href="community.html">Community Stories</a>
+</nav>
+<!-- Mobile Navigation Dropdown (dark) -->
+<select id="nav-select" onchange="handleTopicChange(this.value)">
+  <option value="index.html">Home</option>
+  <option value="health.html" selected>Health & Wellness</option>
+  <option value="selflove.html">Self Love & Mental Health</option>
+  <option value="relationships.html">Relationships & Family</option>
+  <option value="education.html">Education & Knowledge</option>
+  <option value="motivation.html">Motivation & Inspiration</option>
+  <option value="spirituality.html">Spirituality & Law of Attraction</option>
+  <option value="lifestyle.html">Lifestyle & Daily Living</option>
+  <option value="finance.html">Finance & Career</option>
+  <option value="trending.html">Trending & World News</option>
+  <option value="nature.html">Nature & Environment</option>
+  <option value="technology.html">Technology & Innovation</option>
+  <option value="community.html">Community Stories</option>
+</select>
+<!-- Post Container -->
+<div class="post-container">
+  <div class="post-header">
+    <h2 class="post-page-title">Nutrition for Balanced Living</h2>
+  </div>
+  
+  <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Nutrition for Balanced Living" class="post-page-image">
+  
+  <div class="post-page-content">
+    <div class="post-page-text">
+      <p>Nutrition is the foundation of a healthy and balanced life. The food we consume directly impacts our physical health, mental clarity, emotional well-being, and overall vitality. In this article, we'll explore how to create a balanced diet that nourishes your body and mind, supporting your journey toward optimal wellness.</p>
+      
+      <h3>Understanding Balanced Nutrition</h3>
+      <p>Balanced nutrition means consuming a variety of foods in the right proportions to provide your body with all the essential nutrients it needs to function optimally. It's not about strict dietary limitations or depriving yourself of the foods you love, but rather about feeling great, having more energy, improving your health, and boosting your mood.</p>
+      
+      <h3>The Building Blocks of a Healthy Diet</h3>
+      <p>A balanced diet includes a variety of food groups, each providing unique nutrients that support different bodily functions:</p>
+      
+      <ul>
+        <li><strong>Proteins:</strong> Essential for building and repairing tissues, making enzymes and hormones, and supporting immune function. Include lean meats, fish, eggs, dairy, legumes, nuts, and seeds in your diet.</li>
+        <li><strong>Carbohydrates:</strong> The body's primary source of energy. Focus on complex carbohydrates like whole grains, vegetables, and fruits, which provide sustained energy and fiber.</li>
+        <li><strong>Fats:</strong> Necessary for brain health, hormone production, and absorbing certain vitamins. Choose healthy fats from sources like avocados, olive oil, nuts, and fatty fish.</li>
+        <li><strong>Vitamins and Minerals:</strong> Support various bodily functions, from immune health to bone strength. Eat a rainbow of fruits and vegetables to ensure you're getting a wide range.</li>
+        <li><strong>Water:</strong> Essential for digestion, nutrient absorption, temperature regulation, and detoxification. Aim for at least 8 glasses daily.</li>
+      </ul>
+      
+      <h3>Superfoods for Enhanced Wellness</h3>
+      <p>While all whole foods have nutritional value, some are particularly dense in nutrients and offer exceptional health benefits. These "superfoods" can be easily incorporated into your daily diet:</p>
+      
+      <ul>
+        <li><strong>Berries:</strong> Rich in antioxidants, vitamins, and fiber. Blueberries, strawberries, and raspberries support brain health and reduce inflammation.</li>
+        <li><strong>Leafy Greens:</strong> Spinach, kale, and Swiss chard are packed with vitamins A, C, K, and folate, as well as calcium and iron.</li>
+        <li><strong>Nuts and Seeds:</strong> Almonds, walnuts, chia seeds, and flaxseeds provide healthy fats, protein, and fiber.</li>
+        <li><strong>Fatty Fish:</strong> Salmon, mackerel, and sardines are excellent sources of omega-3 fatty acids, which support brain and heart health.</li>
+        <li><strong>Whole Grains:</strong> Quinoa, brown rice, and oats offer complex carbohydrates, fiber, and B vitamins.</li>
+      </ul>
+      
+      <h3>Meal Planning for Balance</h3>
+      <p>Effective meal planning is key to maintaining balanced nutrition. Here are some strategies to help you plan nutritious meals:</p>
+      
+      <ul>
+        <li><strong>The Plate Method:</strong> Fill half your plate with vegetables and fruits, one-quarter with lean protein, and one-quarter with whole grains.</li>
+        <li><strong>Prep Ahead:</strong> Dedicate time each week to wash, chop, and portion ingredients. This makes healthy eating more convenient during busy days.</li>
+        <li><strong>Batch Cooking:</strong> Prepare larger quantities of staple foods like grains, proteins, and roasted vegetables to mix and match throughout the week.</li>
+        <li><strong>Healthy Snacking:</strong> Keep nutritious snacks like fruits, nuts, yogurt, and cut vegetables readily available to avoid reaching for processed options.</li>
+      </ul>
+      
+      <h3>Listening to Your Body</h3>
+      <p>Beyond following nutritional guidelines, it's important to develop body awareness and learn to recognize your body's signals. Pay attention to how different foods make you feel. Do they energize you or make you sluggish? Do they support digestion or cause discomfort? This personalized approach helps you fine-tune your diet to meet your unique needs.</p>
+      
+      <h3>Conclusion</h3>
+      <p>Nutrition for balanced living is about creating a sustainable, enjoyable way of eating that nourishes your body and mind. By focusing on whole foods, variety, and mindful eating, you can support your overall health and well-being. Remember, small, consistent changes lead to lasting results. Start with one or two adjustments to your diet and build from there, creating a foundation of health that will serve you for years to come.</p>
+    </div>
+    
+    <div class="post-page-meta">
+      <div class="post-date">
+        <i class="far fa-calendar-alt"></i>
+        <span>May 15, 2023</span>
+      </div>
+      <div class="post-category">
+        <i class="far fa-folder"></i>
+        <span>Health & Wellness</span>
+      </div>
+    </div>
+  </div>
+  
+  <a href="health.html" class="back-to-posts">
+    <i class="fas fa-arrow-left"></i> Back to Health Articles
+  </a>
+</div>
+<!-- Footer -->
+<footer>
+  <p>© 2025 Holistic Glow. All rights reserved.</p>
+</footer>
+<button id="scrollTopBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">&#8679;</button>
+<script>
+// Handle language change - redirect to language-specific page
+function handleLanguageChange(lang) {
+  if (lang === 'si') {
+    window.location.href = '../sinhala.html';
+  } else if (lang === 'ta') {
+    window.location.href = '../tamil.html';
+  }
+}
+// Handle topic change - redirect to topic-specific page
+function handleTopicChange(topicPage) {
+  window.location.href = topicPage;
+}
+/* ===== Scroll-to-top visibility ===== */
+window.addEventListener('scroll', ()=>{ 
+  document.getElementById('scrollTopBtn').style.display=((document.documentElement.scrollTop || document.body.scrollTop)>120) ? 'grid':'none'; 
+});
+</script>
+</body>
+</html>
