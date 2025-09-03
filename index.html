@@ -15,6 +15,11 @@
     --glass: rgba(0,0,0,0.5);
     --light-glass: rgba(255,255,255,0.1);
     --accent: #4a6cf7;
+    --purple: #9d4edd;
+    --pink: #c77dff;
+    --blue: #7209b7;
+    --teal: #4cc9f0;
+    --green: #06ffa5;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html,body{font-family:'Montserrat',sans-serif; color:#fff; scroll-behavior:smooth; overflow-x:hidden;}
@@ -588,14 +593,15 @@
   
   /* Highlighted middle card (Show Productivity) */
   .productivity-section{
-    background: linear-gradient(135deg, #f9f9f9, #eef3ff);
-    color:#222; 
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 165, 0, 0.2) 100%);
+    color:#fff; 
     padding:50px 25px; 
     margin:40px auto; 
     border-radius:20px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.2);
     position: relative;
     overflow: hidden;
+    max-width: 900px;
   }
   
   .productivity-section::before {
@@ -605,15 +611,15 @@
     right: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(74,108,247,0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
     animation: float 20s infinite linear;
   }
   
   .productivity-card{
     max-width:900px; 
     margin:auto; 
-    background: linear-gradient(135deg, #ffffff, #f5f9ff);
-    color:#2b2b2b;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%);
+    color:#fff;
     border-radius:22px; 
     box-shadow:0 10px 30px rgba(0,0,0,0.15);
     padding:35px; 
@@ -623,13 +629,13 @@
   }
   
   .productivity-card h2{ 
-    color:#1f1f1f;
+    color:var(--gold);
     font-size: clamp(1.8rem, 3.5vw, 2.6rem);
     margin-bottom: 20px;
   }
   
   .productivity-card p{ 
-    color:#444;
+    color:#fff;
     font-size: 1.1rem;
     line-height: 1.7;
     max-width: 700px;
@@ -643,15 +649,15 @@
     border-radius:12px; 
     font-weight:700; 
     text-decoration:none;
-    background:linear-gradient(135deg, #4a6cf7, #3a5ce4); 
-    color:#fff;
+    background:linear-gradient(135deg, var(--gold), var(--gold-2)); 
+    color:#000;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(74,108,247,0.3);
+    box-shadow: 0 5px 15px rgba(255,215,0,0.3);
   }
   
   .cta-primary:hover{ 
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(74,108,247,0.4);
+    box-shadow: 0 8px 25px rgba(255,215,0,0.4);
   }
   
   /* Footer + ScrollTop */
@@ -1179,6 +1185,10 @@
     }
     
     .welcome-message {
+      padding: 30px 15px;
+    }
+    
+    .productivity-section {
       padding: 30px 15px;
     }
   }
@@ -1778,10 +1788,29 @@ function renderPosts(filterTopic = "") {
       div.appendChild(img);
     }
     
-    // Add title
+    // Add title with link to topic page
+    const titleLink = document.createElement('a');
+    titleLink.href = `${p.topic}.html`;
+    titleLink.style.color = 'var(--gold)';
+    titleLink.style.textDecoration = 'none';
+    titleLink.style.transition = 'all 0.3s ease';
+    
     const title = document.createElement('h3');
     title.textContent = p.title;
-    div.appendChild(title);
+    titleLink.appendChild(title);
+    div.appendChild(titleLink);
+    
+    // Add hover effect
+    titleLink.addEventListener('mouseenter', function() {
+      this.style.textDecoration = 'underline';
+      this.style.transform = 'translateX(5px)';
+      this.style.display = 'inline-block';
+    });
+    
+    titleLink.addEventListener('mouseleave', function() {
+      this.style.textDecoration = 'none';
+      this.style.transform = 'translateX(0)';
+    });
     
     // Add content
     div.appendChild(contentDiv);
@@ -1918,9 +1947,16 @@ window.addPost = function() {
     return;
   }
   
+  // Generate a URL-friendly slug from the title
+  const slug = title.toLowerCase()
+    .replace(/[^\w\s-]/g, '') // Remove special characters
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-'); // Remove consecutive hyphens
+  
   const postObj = { 
     type: "post",
     title, 
+    slug, // Add the slug
     image: imageUrl, 
     desc, 
     topic, 
