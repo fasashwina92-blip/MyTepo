@@ -476,6 +476,27 @@
     box-shadow: 0 8px 20px rgba(0,0,0,0.4);
   }
   
+  /* Loading indicator */
+  .loading-container {
+    text-align: center;
+    padding: 20px;
+    display: none;
+  }
+  
+  .loading-spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: var(--gold);
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
   /* Responsive */
   @media (max-width: 900px){
     nav{ display:none; }   /* use dropdown on mobile */
@@ -508,8 +529,8 @@
 <!-- Language Selector -->
 <select class="language-select" id="language-select" onchange="handleLanguageChange(this.value)">
   <option value="en">English</option>
-  <option value="si">සිංහල</option>
-  <option value="ta">தமிழ்</option>
+  <option value="health-sinhala.html">සිංහල</option>
+  <option value="health-tamil.html">தமிழ்</option>
 </select>
 <header>
   <h1>Health & Wellness</h1>
@@ -560,62 +581,149 @@
 <!-- Posts Section -->
 <div class="posts-section">
   <h2 class="section-title">Latest Articles</h2>
-  <div class="posts-grid">
-    <!-- Post 1 -->
-    <div class="post-card">
-      <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nutrition for Balanced Living" class="post-image">
-      <div class="post-content">
-        <h3 class="post-title">Nutrition for Balanced Living</h3>
-        <p class="post-excerpt">Discover how to create a balanced diet that nourishes your body and mind. Learn about superfoods, meal planning, and nutritional strategies that support overall wellness and vitality.</p>
-        <div class="post-meta">
-          <div class="post-date">
-            <i class="far fa-calendar-alt"></i>
-            <span>May 15, 2023</span>
-          </div>
-          <a href="nutrition-for-balanced-living.html" class="read-more-btn">Read More</a>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Post 2 -->
-    <div class="post-card">
-      <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mind-Body Connection" class="post-image">
-      <div class="post-content">
-        <h3 class="post-title">The Mind-Body Connection</h3>
-        <p class="post-excerpt">Explore the powerful connection between mental and physical health. Learn techniques to enhance this connection, reduce stress, and promote holistic healing through mindfulness and movement.</p>
-        <div class="post-meta">
-          <div class="post-date">
-            <i class="far fa-calendar-alt"></i>
-            <span>April 28, 2023</span>
-          </div>
-          <a href="mind-body-connection.html" class="read-more-btn">Read More</a>
-        </div>
-      </div>
-    </div>
+  
+  <!-- Loading indicator -->
+  <div class="loading-container" id="loading-indicator">
+    <div class="loading-spinner"></div>
+  </div>
+  
+  <div class="posts-grid" id="posts-grid">
+    <!-- Posts will be dynamically loaded here -->
   </div>
 </div>
+
+<!-- Post Names Configuration -->
+<!-- To add a new post, simply add the post HTML filename below:
+     nutrition-for-balanced-living
+     mind-body-connection
+     etc. -->
+<div id="post-names" style="display:none;">
+  nutrition-for-balanced-living
+  mind-body-connection
+</div>
+
 <!-- Footer -->
 <footer>
   <p>© 2025 Holistic Glow. All rights reserved.</p>
 </footer>
 <button id="scrollTopBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">&#8679;</button>
+
 <script>
 // Handle language change - redirect to language-specific page
 function handleLanguageChange(lang) {
-  if (lang === 'si') {
-    window.location.href = 'sinhala.html';
-  } else if (lang === 'ta') {
-    window.location.href = 'tamil.html';
+  if (lang === 'health-sinhala.html') {
+    window.location.href = 'health-sinhala.html';
+  } else if (lang === 'health-tamil.html') {
+    window.location.href = 'health-tamil.html';
   }
 }
+
 // Handle topic change - redirect to topic-specific page
 function handleTopicChange(topicPage) {
   window.location.href = topicPage;
 }
+
 /* ===== Scroll-to-top visibility ===== */
 window.addEventListener('scroll', ()=>{ 
   document.getElementById('scrollTopBtn').style.display=((document.documentElement.scrollTop || document.body.scrollTop)>120) ? 'grid':'none'; 
 });
+
+// Function to extract content from a post HTML file
+async function extractPostContent(postFile) {
+  try {
+    const response = await fetch(`health/${postFile}.html`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${postFile}.html`);
+    }
+    
+    const htmlText = await response.text();
+    
+    // Create a temporary DOM element to parse the HTML
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlText, 'text/html');
+    
+    // Extract the title
+    const title = doc.querySelector('title')?.textContent.replace(' - Holistic Glow', '') || 
+                  doc.querySelector('header h1')?.textContent || 
+                  'Untitled Post';
+    
+    // Extract the main image
+    const imageUrl = doc.querySelector('.post-page-image')?.src || 
+                    `https://source.unsplash.com/random/600x400/?${postFile}`;
+    
+    // Extract the first paragraph as an excerpt
+    const excerpt = doc.querySelector('.post-page-text p')?.textContent || 
+                   'Click to read this article about health and wellness.';
+    
+    // Extract the date
+    const dateElement = doc.querySelector('.post-date span');
+    const date = dateElement ? dateElement.textContent : new Date().toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+    
+    return {
+      title,
+      imageUrl,
+      excerpt,
+      date,
+      url: `health/${postFile}.html`
+    };
+  } catch (error) {
+    console.error(`Error extracting content from ${postFile}:`, error);
+    return null;
+  }
+}
+
+// Load posts from configuration
+async function loadPosts() {
+  const postsGrid = document.getElementById('posts-grid');
+  const postNamesDiv = document.getElementById('post-names');
+  const loadingIndicator = document.getElementById('loading-indicator');
+  
+  // Show loading indicator
+  loadingIndicator.style.display = 'block';
+  
+  // Get post names (split by newline)
+  const postNames = postNamesDiv.textContent.trim().split('\n').map(name => name.trim()).filter(name => name);
+  
+  // Clear existing posts
+  postsGrid.innerHTML = '';
+  
+  // Process each post
+  for (const postName of postNames) {
+    const postData = await extractPostContent(postName);
+    
+    if (postData) {
+      const postCard = document.createElement('div');
+      postCard.className = 'post-card';
+      
+      postCard.innerHTML = `
+        <img src="${postData.imageUrl}" alt="${postData.title}" class="post-image">
+        <div class="post-content">
+          <h3 class="post-title">${postData.title}</h3>
+          <p class="post-excerpt">${postData.excerpt.substring(0, 150)}${postData.excerpt.length > 150 ? '...' : ''}</p>
+          <div class="post-meta">
+            <div class="post-date">
+              <i class="far fa-calendar-alt"></i>
+              <span>${postData.date}</span>
+            </div>
+            <a href="${postData.url}" class="read-more-btn">Read More</a>
+          </div>
+        </div>
+      `;
+      
+      postsGrid.appendChild(postCard);
+    }
+  }
+  
+  // Hide loading indicator
+  loadingIndicator.style.display = 'none';
+}
+
+// Load posts when page loads
+window.addEventListener('load', loadPosts);
 </script>
 </body>
 </html>
