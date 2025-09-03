@@ -497,6 +497,17 @@
     to { transform: rotate(360deg); }
   }
   
+  /* Error message */
+  .error-message {
+    text-align: center;
+    color: #ff6b6b;
+    margin: 20px 0;
+    padding: 10px;
+    background: rgba(255, 107, 107, 0.1);
+    border-radius: 8px;
+    display: none;
+  }
+  
   /* Responsive */
   @media (max-width: 900px){
     nav{ display:none; }   /* use dropdown on mobile */
@@ -582,6 +593,9 @@
 <div class="posts-section">
   <h2 class="section-title">Latest Articles</h2>
   
+  <!-- Error message -->
+  <div id="error-message" class="error-message"></div>
+  
   <!-- Loading indicator -->
   <div class="loading-container" id="loading-indicator">
     <div class="loading-spinner"></div>
@@ -631,9 +645,10 @@ window.addEventListener('scroll', ()=>{
 // Function to extract content from a post HTML file
 async function extractPostContent(postFile) {
   try {
+    console.log(`Attempting to load: health/${postFile}.html`);
     const response = await fetch(`health/${postFile}.html`);
     if (!response.ok) {
-      throw new Error(`Failed to fetch ${postFile}.html`);
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
     
     const htmlText = await response.text();
@@ -663,6 +678,8 @@ async function extractPostContent(postFile) {
       day: 'numeric' 
     });
     
+    console.log(`Successfully loaded: ${title}`);
+    
     return {
       title,
       imageUrl,
@@ -672,6 +689,8 @@ async function extractPostContent(postFile) {
     };
   } catch (error) {
     console.error(`Error extracting content from ${postFile}:`, error);
+    document.getElementById('error-message').textContent = `Error loading post "${postFile}": ${error.message}`;
+    document.getElementById('error-message').style.display = 'block';
     return null;
   }
 }
@@ -681,12 +700,18 @@ async function loadPosts() {
   const postsGrid = document.getElementById('posts-grid');
   const postNamesDiv = document.getElementById('post-names');
   const loadingIndicator = document.getElementById('loading-indicator');
+  const errorMessage = document.getElementById('error-message');
+  
+  // Hide error message
+  errorMessage.style.display = 'none';
   
   // Show loading indicator
   loadingIndicator.style.display = 'block';
   
   // Get post names (split by newline)
   const postNames = postNamesDiv.textContent.trim().split('\n').map(name => name.trim()).filter(name => name);
+  
+  console.log('Loading posts:', postNames);
   
   // Clear existing posts
   postsGrid.innerHTML = '';
