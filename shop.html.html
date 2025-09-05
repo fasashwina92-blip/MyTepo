@@ -120,39 +120,33 @@
     border-color: var(--gold);
   }
   
-  /* Category Filters */
-  .category-filters {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 0 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-  }
-  
-  .filter-btn {
-    padding: 12px 20px;
-    background: linear-gradient(135deg, var(--glass) 0%, rgba(0,0,0,0.6) 100%);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 30px;
+  /* Mobile Category Dropdown */
+  .mobile-category-select {
+    display: block;
+    width: 90%;
+    margin: 20px auto;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.7);
     color: #fff;
     font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 0.9rem;
   }
   
-  .filter-btn:hover {
+  .mobile-category-select:hover {
     background: rgba(255,215,0,0.2);
     border-color: var(--gold);
-    transform: translateY(-2px);
   }
   
-  .filter-btn.active {
-    background: linear-gradient(135deg, var(--gold), var(--gold-2));
-    color: var(--dark);
-    border-color: var(--gold);
+  /* Category Filters - Desktop Only */
+  .category-filters {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    display: none;
   }
   
   /* Back to Home Button */
@@ -364,19 +358,20 @@
     margin-right: 10px;
   }
   
-  /* Categories Section */
+  /* Categories Section - Desktop Only */
   .categories-section {
     max-width: 1200px;
-    margin: 60px auto;
+    margin: 40px auto;
     padding: 0 20px;
+    display: block;
   }
   
-  /* Categories grid */
+  /* Categories grid - 3 columns on desktop */
   .categories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 30px;
   }
   
   .category-card {
@@ -488,8 +483,16 @@
   /* Responsive */
   @media (max-width: 900px){
     .categories-grid {
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-template-columns: 1fr;
       gap: 20px;
+    }
+    
+    .categories-section {
+      display: none;
+    }
+    
+    .mobile-category-select {
+      display: block;
     }
     
     .products-grid {
@@ -508,11 +511,15 @@
     .welcome-message {
       padding: 30px 15px;
     }
+  }
+  
+  @media (min-width: 901px) {
+    .mobile-category-select {
+      display: none;
+    }
     
-    .category-filters {
-      justify-content: flex-start;
-      overflow-x: auto;
-      padding-bottom: 10px;
+    .categories-section {
+      display: block;
     }
   }
 </style>
@@ -527,28 +534,118 @@
 <header>
   <h1>HOLISTIC GLOW Shop</h1>
 </header>
+
+<!-- Mobile Category Dropdown -->
+<select class="mobile-category-select" id="mobile-category-select" onchange="handleMobileCategoryChange(this.value)">
+  <option value="all">All Products</option>
+  <option value="health-wellness">Health & Wellness</option>
+  <option value="electronics">Electronics</option>
+  <option value="fashion">Fashion</option>
+  <option value="home-kitchen">Home & Kitchen</option>
+  <option value="sports-outdoors">Sports & Outdoors</option>
+  <option value="books-media">Books & Media</option>
+  <option value="spare-parts">Spare Parts</option>
+</select>
+
 <!-- Back to Home Button -->
 <div class="back-to-home-container">
   <a href="index.html" class="back-to-home">
     <i class="fas fa-home"></i> Back to Home
   </a>
 </div>
+
 <!-- Welcome Message -->
 <div class="welcome-message">
   <h2>Our Shop</h2>
   <p>Discover our wide range of products curated to enhance your lifestyle. From wellness essentials to the latest technology, we have everything you need to live your best life.</p>
 </div>
-<!-- Category Filters -->
-<div class="category-filters" id="category-filters">
-  <button class="filter-btn active" data-category="all">All Products</button>
-  <button class="filter-btn" data-category="health-wellness">Health & Wellness</button>
-  <button class="filter-btn" data-category="electronics">Electronics</button>
-  <button class="filter-btn" data-category="fashion">Fashion</button>
-  <button class="filter-btn" data-category="home-kitchen">Home & Kitchen</button>
-  <button class="filter-btn" data-category="sports-outdoors">Sports & Outdoors</button>
-  <button class="filter-btn" data-category="books-media">Books & Media</button>
-  <button class="filter-btn" data-category="spare-parts">Spare Parts</button>
+
+<!-- Categories Section - Desktop Only -->
+<div class="categories-section">
+  <h2 class="section-title">Shop by Category</h2>
+  <div class="categories-grid">
+    <!-- Health & Wellness Category -->
+    <a href="health.html" class="category-card">
+      <img src="https://images.unsplash.com/photo-1600830292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Health & Wellness" class="category-image">
+      <div class="category-content">
+        <h3 class="category-title">Health & Wellness</h3>
+        <p class="category-description">Natural supplements, herbal remedies, and wellness products for a healthier lifestyle.</p>
+        <div class="category-count">3 Products</div>
+      </div>
+    </a>
+    
+    <!-- Electronics Category -->
+    <a href="electronics.html" class="category-card">
+      <img src="https://images.unsplash.com/photo-1498049799966-3c7c3d33fa1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Electronics" class="category-image">
+      <div class="category-content">
+        <h3 class="category-title">Electronics</h3>
+        <p class="category-description">Latest gadgets, smartphones, laptops, and electronic accessories.</p>
+        <div class="category-count">3 Products</div>
+      </div>
+    </a>
+    
+    <!-- Fashion Category -->
+    <a href="fashion.html" class="category-card">
+      <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fashion" class="category-image">
+      <div class="category-content">
+        <h3 class="category-title">Fashion</h3>
+        <p class="category-description">Trendy clothing, accessories, and footwear for men and women.</p>
+        <div class="category-count">3 Products</div>
+      </div>
+    </a>
+    
+    <!-- Home & Kitchen Category -->
+    <a href="home-kitchen.html" class="category-card">
+      <img src="https://images.unsplash.com/photo-1556911220-bff31c8a2e48?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Home & Kitchen" class="category-image">
+      <div class="category-content">
+        <h3 class="category-title">Home & Kitchen</h3>
+        <p class="category-description">Furniture, kitchen appliances, and home decor items.</p>
+        <div class="category-count">3 Products</div>
+      </div>
+    </a>
+    
+    <!-- Sports & Outdoors Category -->
+    <a href="sports-outdoors.html" class="category-card">
+      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sports & Outdoors" class="category-image">
+      <div class="category-content">
+        <h3 class="category-title">Sports & Outdoors</h3>
+        <p class="category-description">Fitness equipment, outdoor gear, and sports accessories.</p>
+        <div class="category-count">3 Products</div>
+      </div>
+    </a>
+    
+    <!-- Books & Media Category -->
+    <a href="books-media.html" class="category-card">
+      <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Books & Media" class="category-image">
+      <div class="category-content">
+        <h3 class="category-title">Books & Media</h3>
+        <p class="category-description">Educational books, novels, and media for entertainment and learning.</p>
+        <div class="category-count">2 Products</div>
+      </div>
+    </a>
+    
+    <!-- Spare Parts Category -->
+    <a href="spare-parts.html" class="category-card">
+      <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Spare Parts" class="category-image">
+      <div class="category-content">
+        <h3 class="category-title">Spare Parts</h3>
+        <p class="category-description">High-quality replacement parts for electronics, vehicles, and home appliances.</p>
+        <div class="category-count">3 Products</div>
+      </div>
+    </a>
+    
+    <!-- All Products Category -->
+    <a href="shop.html" class="category-card">
+      <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="All Products" class="category-image">
+      <div class="category-content">
+        <h3 class="category-title">All Products</h3>
+        <p class="category-description">Browse our complete catalog of products from all categories in one place.</p>
+        <div class="category-count">20+ Products</div>
+      </div>
+    </a>
+  </div>
 </div>
+
 <!-- Products Section -->
 <div class="products-section">
   <h2 class="section-title">Products</h2>
@@ -562,91 +659,7 @@
     </button>
   </div>
 </div>
-<!-- Categories Section -->
-<div class="categories-section" id="categories-section" style="display: none;">
-  <h2 class="section-title">Shop by Category</h2>
-  <div class="categories-grid">
-    <!-- Health & Wellness Category -->
-    <div class="category-card" data-category="health-wellness">
-      <img src="https://images.unsplash.com/photo-1600830292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Health & Wellness" class="category-image">
-      <div class="category-content">
-        <h3 class="category-title">Health & Wellness</h3>
-        <p class="category-description">Natural supplements, herbal remedies, and wellness products for a healthier lifestyle.</p>
-        <div class="category-count">3 Products</div>
-      </div>
-    </div>
-    
-    <!-- Electronics Category -->
-    <div class="category-card" data-category="electronics">
-      <img src="https://images.unsplash.com/photo-1498049799966-3c7c3d33fa1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Electronics" class="category-image">
-      <div class="category-content">
-        <h3 class="category-title">Electronics</h3>
-        <p class="category-description">Latest gadgets, smartphones, laptops, and electronic accessories.</p>
-        <div class="category-count">3 Products</div>
-      </div>
-    </div>
-    
-    <!-- Fashion Category -->
-    <div class="category-card" data-category="fashion">
-      <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fashion" class="category-image">
-      <div class="category-content">
-        <h3 class="category-title">Fashion</h3>
-        <p class="category-description">Trendy clothing, accessories, and footwear for men and women.</p>
-        <div class="category-count">3 Products</div>
-      </div>
-    </div>
-    
-    <!-- Home & Kitchen Category -->
-    <div class="category-card" data-category="home-kitchen">
-      <img src="https://images.unsplash.com/photo-1556911220-bff31c8a2e48?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Home & Kitchen" class="category-image">
-      <div class="category-content">
-        <h3 class="category-title">Home & Kitchen</h3>
-        <p class="category-description">Furniture, kitchen appliances, and home decor items.</p>
-        <div class="category-count">3 Products</div>
-      </div>
-    </div>
-    
-    <!-- Sports & Outdoors Category -->
-    <div class="category-card" data-category="sports-outdoors">
-      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sports & Outdoors" class="category-image">
-      <div class="category-content">
-        <h3 class="category-title">Sports & Outdoors</h3>
-        <p class="category-description">Fitness equipment, outdoor gear, and sports accessories.</p>
-        <div class="category-count">3 Products</div>
-      </div>
-    </div>
-    
-    <!-- Books & Media Category -->
-    <div class="category-card" data-category="books-media">
-      <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Books & Media" class="category-image">
-      <div class="category-content">
-        <h3 class="category-title">Books & Media</h3>
-        <p class="category-description">Educational books, novels, and media for entertainment and learning.</p>
-        <div class="category-count">2 Products</div>
-      </div>
-    </div>
-    
-    <!-- Spare Parts Category -->
-    <div class="category-card" data-category="spare-parts">
-      <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Spare Parts" class="category-image">
-      <div class="category-content">
-        <h3 class="category-title">Spare Parts</h3>
-        <p class="category-description">High-quality replacement parts for electronics, vehicles, and home appliances.</p>
-        <div class="category-count">3 Products</div>
-      </div>
-    </div>
-    
-    <!-- All Products Category -->
-    <div class="category-card" data-category="all">
-      <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="All Products" class="category-image">
-      <div class="category-content">
-        <h3 class="category-title">All Products</h3>
-        <p class="category-description">Browse our complete catalog of products from all categories in one place.</p>
-        <div class="category-count">20+ Products</div>
-      </div>
-    </div>
-  </div>
-</div>
+
 <!-- Footer -->
 <footer>
   <p>© 2025 Holistic Glow. All rights reserved.</p>
@@ -662,17 +675,25 @@ function handleLanguageChange(lang) {
     window.location.href = 'tamil.html';
   }
 }
+
+// Handle mobile category change - redirect to category page
+function handleMobileCategoryChange(category) {
+  if (category === 'all') {
+    window.location.href = 'shop.html';
+  } else {
+    window.location.href = category + '.html';
+  }
+}
+
 /* ===== Scroll-to-top visibility ===== */
 window.addEventListener('scroll', ()=>{ 
   document.getElementById('scrollTopBtn').style.display=((document.documentElement.scrollTop || document.body.scrollTop)>120) ? 'grid':'none'; 
 });
-
 // Variables for pagination and filtering
 let currentCategory = 'all';
 let productsToShow = 9;
 let allProducts = [];
 let filteredProducts = [];
-
 // Function to display products in a grid
 function displayProducts(products, containerId, reset = false) {
   const container = document.getElementById(containerId);
@@ -697,7 +718,6 @@ function displayProducts(products, containerId, reset = false) {
     container.appendChild(productCard);
   });
 }
-
 // Function to filter products by category
 function filterProducts(category) {
   currentCategory = category;
@@ -709,14 +729,6 @@ function filterProducts(category) {
     filteredProducts = allProducts.filter(product => product.category === category);
   }
   
-  // Update active filter button
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.classList.remove('active');
-    if (btn.dataset.category === category) {
-      btn.classList.add('active');
-    }
-  });
-  
   // Display first batch of products
   displayProducts(filteredProducts.slice(0, productsToShow), 'products-grid', true);
   
@@ -727,11 +739,7 @@ function filterProducts(category) {
   } else {
     showMoreBtn.style.display = 'none';
   }
-  
-  // Hide categories section when filtering
-  document.getElementById('categories-section').style.display = 'none';
 }
-
 // Function to show more products
 function showMoreProducts() {
   productsToShow += 9;
@@ -746,13 +754,8 @@ function showMoreProducts() {
     showMoreBtn.style.display = 'inline-block';
   } else {
     showMoreBtn.style.display = 'none';
-    // Show categories section when all products are displayed
-    if (currentCategory === 'all') {
-      document.getElementById('categories-section').style.display = 'block';
-    }
   }
 }
-
 // Initialize the page when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
   // Get all products
@@ -762,32 +765,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // Display initial products
   displayProducts(filteredProducts.slice(0, productsToShow), 'products-grid', true);
   
-  // Set up filter buttons
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterProducts(btn.dataset.category);
-    });
-  });
-  
-  // Set up category cards
-  document.querySelectorAll('.category-card').forEach(card => {
-    card.addEventListener('click', () => {
-      filterProducts(card.dataset.category);
-      // Scroll to products section
-      document.querySelector('.products-section').scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-  
   // Set up "Show More" button
   document.getElementById('show-more-btn').addEventListener('click', showMoreProducts);
   
   // Initially hide "Show More" button if there are 9 or fewer products
   if (filteredProducts.length <= productsToShow) {
     document.getElementById('show-more-btn').style.display = 'none';
-    // Show categories section if all products are displayed initially
-    if (currentCategory === 'all') {
-      document.getElementById('categories-section').style.display = 'block';
-    }
   }
 });
 </script>
