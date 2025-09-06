@@ -440,6 +440,34 @@
     color: rgba(255,255,255,0.7);
   }
   
+  /* View All Products Button */
+  .view-all-products {
+    text-align: center;
+    margin: 30px 0;
+  }
+  
+  .view-all-products-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-2));
+    color: var(--dark);
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+  }
+  
+  .view-all-products-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255,215,0,0.4);
+  }
+  
+  .view-all-products-btn i {
+    margin-right: 10px;
+  }
+  
   /* Footer + ScrollTop */
   footer{ 
     background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
@@ -533,7 +561,7 @@
 </header>
 <!-- Mobile Category Dropdown -->
 <select class="mobile-category-select" id="mobile-category-select" onchange="handleMobileCategoryChange(this.value)">
-  <option value="shop.html">All Products</option>
+  <option value="all-products.html">All Products</option>
   <option value="Shop/natural-remedies.html">Natural Remedies</option>
   <option value="Shop/electronics.html">Electronics</option>
   <option value="Shop/fashion.html">Fashion</option>
@@ -555,15 +583,15 @@
 </div>
 <!-- Products Section -->
 <div class="products-section">
-  <h2 class="section-title">All Products</h2>
+  <h2 class="section-title">Featured Products</h2>
   <div class="products-grid" id="products-grid">
     <!-- Products will be dynamically loaded here -->
   </div>
-  <!-- Show More Button -->
-  <div class="show-more-container">
-    <button id="show-more-btn" class="show-more-btn">
-      <i class="fas fa-plus-circle"></i> Show More Products
-    </button>
+  <!-- View All Products Button -->
+  <div class="view-all-products">
+    <a href="all-products.html" class="view-all-products-btn">
+      <i class="fas fa-th-large"></i> View All Products
+    </a>
   </div>
 </div>
 <!-- Categories Section - Now visible on all devices -->
@@ -646,8 +674,213 @@
   <p>© 2025 Holistic Glow. All rights reserved.</p>
 </footer>
 <button id="scrollTopBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">&#8679;</button>
-<script src="products.js"></script>
 <script>
+// Product data embedded directly in the HTML
+function getAllProducts() {
+  return [
+    {
+      id: 1,
+      name: "Herbal Wellness Tea",
+      price: 1200,
+      image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574",
+      description: "A soothing blend of organic herbs to promote relaxation and wellness.",
+      category: "natural-remedies",
+      categoryName: "Natural Remedies",
+      link: "product-details.html?id=1"
+    },
+    {
+      id: 2,
+      name: "Organic Honey",
+      price: 850,
+      image: "https://images.unsplash.com/photo-1587049352851-8d4f891a7873",
+      description: "Pure, unprocessed honey sourced from organic farms.",
+      category: "natural-remedies",
+      categoryName: "Natural Remedies",
+      link: "product-details.html?id=2"
+    },
+    {
+      id: 3,
+      name: "Essential Oils Set",
+      price: 2500,
+      image: "https://images.unsplash.com/photo-1558804114-4be056c46013",
+      description: "A collection of premium essential oils for aromatherapy and wellness.",
+      category: "natural-remedies",
+      categoryName: "Natural Remedies",
+      link: "product-details.html?id=3"
+    },
+    {
+      id: 4,
+      name: "Wireless Bluetooth Headphones",
+      price: 8500,
+      image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
+      description: "High-quality wireless headphones with noise cancellation and long battery life.",
+      category: "electronics",
+      categoryName: "Electronics",
+      link: "product-details.html?id=4"
+    },
+    {
+      id: 5,
+      name: "Smart Fitness Watch",
+      price: 12500,
+      image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
+      description: "Track your fitness goals with this advanced smartwatch.",
+      category: "electronics",
+      categoryName: "Electronics",
+      link: "product-details.html?id=5"
+    },
+    {
+      id: 6,
+      name: "Portable Bluetooth Speaker",
+      price: 4500,
+      image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1",
+      description: "Compact speaker with powerful sound and waterproof design.",
+      category: "electronics",
+      categoryName: "Electronics",
+      link: "product-details.html?id=6"
+    },
+    {
+      id: 7,
+      name: "Designer Handbag",
+      price: 9500,
+      image: "https://images.unsplash.com/photo-1584917895444-53c633d9c6b8",
+      description: "Elegant handbag crafted from premium materials.",
+      category: "fashion",
+      categoryName: "Fashion",
+      link: "product-details.html?id=7"
+    },
+    {
+      id: 8,
+      name: "Casual Sneakers",
+      price: 6500,
+      image: "https://images.unsplash.com/photo-1549298916-b41d501d3772",
+      description: "Comfortable sneakers perfect for everyday wear.",
+      category: "fashion",
+      categoryName: "Fashion",
+      link: "product-details.html?id=8"
+    },
+    {
+      id: 9,
+      name: "Sunglasses",
+      price: 3500,
+      image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f",
+      description: "Stylish sunglasses with UV protection.",
+      category: "fashion",
+      categoryName: "Fashion",
+      link: "product-details.html?id=9"
+    },
+    {
+      id: 10,
+      name: "Ceramic Cookware Set",
+      price: 12000,
+      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136",
+      description: "Non-toxic ceramic cookware set for healthy cooking.",
+      category: "home-kitchen",
+      categoryName: "Home & Kitchen",
+      link: "product-details.html?id=10"
+    },
+    {
+      id: 11,
+      name: "Smart Air Purifier",
+      price: 18500,
+      image: "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe",
+      description: "Advanced air purifier with smart controls and HEPA filter.",
+      category: "home-kitchen",
+      categoryName: "Home & Kitchen",
+      link: "product-details.html?id=11"
+    },
+    {
+      id: 12,
+      name: "Luxury Bedding Set",
+      price: 14500,
+      image: "https://images.unsplash.com/photo-1584362917165-526a968579e8",
+      description: "Premium cotton bedding set for a comfortable night's sleep.",
+      category: "home-kitchen",
+      categoryName: "Home & Kitchen",
+      link: "product-details.html?id=12"
+    },
+    {
+      id: 13,
+      name: "Yoga Mat",
+      price: 3500,
+      image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b",
+      description: "Non-slip yoga mat for comfortable practice.",
+      category: "sports-outdoors",
+      categoryName: "Sports & Outdoors",
+      link: "product-details.html?id=13"
+    },
+    {
+      id: 14,
+      name: "Camping Tent",
+      price: 18500,
+      image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4",
+      description: "Waterproof tent perfect for outdoor adventures.",
+      category: "sports-outdoors",
+      categoryName: "Sports & Outdoors",
+      link: "product-details.html?id=14"
+    },
+    {
+      id: 15,
+      name: "Fitness Resistance Bands",
+      price: 2500,
+      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b",
+      description: "Set of resistance bands for strength training.",
+      category: "sports-outdoors",
+      categoryName: "Sports & Outdoors",
+      link: "product-details.html?id=15"
+    },
+    {
+      id: 16,
+      name: "Mindfulness Journal",
+      price: 1500,
+      image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570",
+      description: "Guided journal for mindfulness and self-reflection.",
+      category: "books-media",
+      categoryName: "Books & Media",
+      link: "product-details.html?id=16"
+    },
+    {
+      id: 17,
+      name: "Healthy Cookbook",
+      price: 2800,
+      image: "https://images.unsplash.com/photo-1506808547685-e2ba962ded60",
+      description: "Collection of nutritious recipes for a healthy lifestyle.",
+      category: "books-media",
+      categoryName: "Books & Media",
+      link: "product-details.html?id=17"
+    },
+    {
+      id: 18,
+      name: "Phone Screen Protector",
+      price: 1200,
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12",
+      description: "Tempered glass screen protector for all phone models.",
+      category: "spare-parts",
+      categoryName: "Spare Parts",
+      link: "product-details.html?id=18"
+    },
+    {
+      id: 19,
+      name: "Laptop Battery",
+      price: 6500,
+      image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45",
+      description: "High-capacity replacement battery for laptops.",
+      category: "spare-parts",
+      categoryName: "Spare Parts",
+      link: "product-details.html?id=19"
+    },
+    {
+      id: 20,
+      name: "Water Filter Cartridge",
+      price: 2800,
+      image: "https://images.unsplash.com/photo-1620704465212-425d33f8d8a5",
+      description: "Replacement cartridge for water filtration systems.",
+      category: "spare-parts",
+      categoryName: "Spare Parts",
+      link: "product-details.html?id=20"
+    }
+  ];
+}
+
 // Handle language change - redirect to language-specific page
 function handleLanguageChange(lang) {
   if (lang === 'si') {
@@ -656,19 +889,21 @@ function handleLanguageChange(lang) {
     window.location.href = 'tamil.html';
   }
 }
+
 // Handle mobile category change - redirect to category page
 function handleMobileCategoryChange(category) {
   window.location.href = category;
 }
+
 /* ===== Scroll-to-top visibility ===== */
 window.addEventListener('scroll', ()=>{ 
   document.getElementById('scrollTopBtn').style.display=((document.documentElement.scrollTop || document.body.scrollTop)>120) ? 'grid':'none'; 
 });
-// Variables for pagination and filtering
-let currentCategory = 'all';
-let productsToShow = 9;
+
+// Variables for pagination
+let productsToShow = 6; // Show only 6 featured products
 let allProducts = [];
-let filteredProducts = [];
+
 // Function to display products in a grid
 function displayProducts(products, containerId, reset = false) {
   const container = document.getElementById(containerId);
@@ -693,60 +928,14 @@ function displayProducts(products, containerId, reset = false) {
     container.appendChild(productCard);
   });
 }
-// Function to filter products by category
-function filterProducts(category) {
-  currentCategory = category;
-  productsToShow = 9; // Reset pagination when changing category
-  
-  if (category === 'all') {
-    filteredProducts = [...allProducts];
-  } else {
-    filteredProducts = allProducts.filter(product => product.category === category);
-  }
-  
-  // Display first batch of products
-  displayProducts(filteredProducts.slice(0, productsToShow), 'products-grid', true);
-  
-  // Show/hide "Show More" button based on remaining products
-  const showMoreBtn = document.getElementById('show-more-btn');
-  if (filteredProducts.length > productsToShow) {
-    showMoreBtn.style.display = 'inline-block';
-  } else {
-    showMoreBtn.style.display = 'none';
-  }
-}
-// Function to show more products
-function showMoreProducts() {
-  productsToShow += 9;
-  const remainingProducts = filteredProducts.slice(0, productsToShow);
-  
-  // Clear and re-display products up to the new count
-  displayProducts(remainingProducts, 'products-grid', true);
-  
-  // Show/hide "Show More" button based on remaining products
-  const showMoreBtn = document.getElementById('show-more-btn');
-  if (filteredProducts.length > productsToShow) {
-    showMoreBtn.style.display = 'inline-block';
-  } else {
-    showMoreBtn.style.display = 'none';
-  }
-}
+
 // Initialize the page when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
   // Get all products
   allProducts = getAllProducts();
-  filteredProducts = [...allProducts];
   
-  // Display initial products (first 9)
-  displayProducts(filteredProducts.slice(0, productsToShow), 'products-grid', true);
-  
-  // Set up "Show More" button
-  document.getElementById('show-more-btn').addEventListener('click', showMoreProducts);
-  
-  // Initially hide "Show More" button if there are 9 or fewer products
-  if (filteredProducts.length <= productsToShow) {
-    document.getElementById('show-more-btn').style.display = 'none';
-  }
+  // Display featured products (first 6)
+  displayProducts(allProducts.slice(0, productsToShow), 'products-grid', true);
 });
 </script>
 </body>
