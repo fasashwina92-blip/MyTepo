@@ -28,7 +28,7 @@
                 url('https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
     background-size:cover;
     position: relative;
-    background-color: #121212;
+    background-color: #121212; /* Added fallback background color */
   }
   
   /* Animated background particles */
@@ -123,6 +123,7 @@
   
   /* Mobile Category Dropdown */
   .mobile-category-select {
+    display: none; /* Changed from block to none */
     width: 90%;
     margin: 20px auto;
     padding: 12px 15px;
@@ -532,14 +533,14 @@
 </header>
 <!-- Mobile Category Dropdown -->
 <select class="mobile-category-select" id="mobile-category-select" onchange="handleMobileCategoryChange(this.value)">
-  <option value="all">All Products</option>
-  <option value="natural-remedies">Natural Remedies</option>
-  <option value="electronics">Electronics</option>
-  <option value="fashion">Fashion</option>
-  <option value="home-kitchen">Home & Kitchen</option>
-  <option value="sports-outdoors">Sports & Outdoors</option>
-  <option value="books-media">Books & Media</option>
-  <option value="spare-parts">Spare Parts</option>
+  <option value="shop.html">All Products</option>
+  <option value="natural-remedies/natural-remedies.html">Natural Remedies</option>
+  <option value="electronics/electronics.html">Electronics</option>
+  <option value="fashion/fashion.html">Fashion</option>
+  <option value="home-kitchen/home-kitchen.html">Home & Kitchen</option>
+  <option value="sports-outdoors/sports-outdoors.html">Sports & Outdoors</option>
+  <option value="books-media/books-media.html">Books & Media</option>
+  <option value="spare-parts/spare-parts.html">Spare Parts</option>
 </select>
 <!-- Back to Home Button -->
 <div class="back-to-home-container">
@@ -570,7 +571,7 @@
   <h2 class="section-title">Shop by Category</h2>
   <div class="categories-grid">
     <!-- Natural Remedies Category -->
-    <a href="natural-remedies.html" class="category-card">
+    <a href="natural-remedies/natural-remedies.html" class="category-card">
       <img src="https://images.unsplash.com/photo-1600830292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Natural Remedies" class="category-image">
       <div class="category-content">
         <h3 class="category-title">Natural Remedies</h3>
@@ -580,7 +581,7 @@
     </a>
     
     <!-- Electronics Category -->
-    <a href="electronics.html" class="category-card">
+    <a href="electronics/electronics.html" class="category-card">
       <img src="https://images.unsplash.com/photo-1498049799966-3c7c3d33fa1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Electronics" class="category-image">
       <div class="category-content">
         <h3 class="category-title">Electronics</h3>
@@ -590,7 +591,7 @@
     </a>
     
     <!-- Fashion Category -->
-    <a href="fashion.html" class="category-card">
+    <a href="fashion/fashion.html" class="category-card">
       <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fashion" class="category-image">
       <div class="category-content">
         <h3 class="category-title">Fashion</h3>
@@ -600,7 +601,7 @@
     </a>
     
     <!-- Home & Kitchen Category -->
-    <a href="home-kitchen.html" class="category-card">
+    <a href="home-kitchen/home-kitchen.html" class="category-card">
       <img src="https://images.unsplash.com/photo-1556911220-bff31c8a2e48?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Home & Kitchen" class="category-image">
       <div class="category-content">
         <h3 class="category-title">Home & Kitchen</h3>
@@ -610,7 +611,7 @@
     </a>
     
     <!-- Sports & Outdoors Category -->
-    <a href="sports-outdoors.html" class="category-card">
+    <a href="sports-outdoors/sports-outdoors.html" class="category-card">
       <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sports & Outdoors" class="category-image">
       <div class="category-content">
         <h3 class="category-title">Sports & Outdoors</h3>
@@ -620,7 +621,7 @@
     </a>
     
     <!-- Books & Media Category -->
-    <a href="books-media.html" class="category-card">
+    <a href="books-media/books-media.html" class="category-card">
       <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Books & Media" class="category-image">
       <div class="category-content">
         <h3 class="category-title">Books & Media</h3>
@@ -630,7 +631,7 @@
     </a>
     
     <!-- Spare Parts Category -->
-    <a href="spare-parts.html" class="category-card">
+    <a href="spare-parts/spare-parts.html" class="category-card">
       <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Spare Parts" class="category-image">
       <div class="category-content">
         <h3 class="category-title">Spare Parts</h3>
@@ -657,11 +658,7 @@ function handleLanguageChange(lang) {
 }
 // Handle mobile category change - redirect to category page
 function handleMobileCategoryChange(category) {
-  if (category === 'all') {
-    window.location.href = 'shop.html';
-  } else {
-    window.location.href = category + '.html';
-  }
+  window.location.href = category;
 }
 /* ===== Scroll-to-top visibility ===== */
 window.addEventListener('scroll', ()=>{ 
@@ -754,4 +751,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
-
