@@ -28,7 +28,7 @@
                 url('https://images.unsplash.com/photo-1600830292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
     background-size:cover;
     position: relative;
-    background-color: #121212; /* Added fallback background color */
+    background-color: #121212;
   }
   
   /* Animated background particles */
@@ -391,7 +391,7 @@
 <div class="category-dropdown">
   <select class="category-select" id="category-select" onchange="handleCategoryChange(this.value)">
     <option value="../shop.html">All Categories</option>
-    <option value="../natural-remedies.html" selected>Natural Remedies</option>
+    <option value="natural-remedies.html" selected>Natural Remedies</option>
     <option value="../electronics.html">Electronics</option>
     <option value="../fashion.html">Fashion</option>
     <option value="../home-kitchen.html">Home & Kitchen</option>
@@ -424,41 +424,25 @@
 </footer>
 <button id="scrollTopBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">&#8679;</button>
 <script>
-// PRODUCT LIST: Add your product HTML filenames here only
+// PRODUCT LIST: Only green tea product in subfolder
 const productFiles = [
-  "green-tea.html",
-  "vitamin-c.html",
-  "protein-powder.html"
-  // Add more product filenames here
+  "natural-remedies/green-tea.html"
 ];
-// PRODUCT DETAILS: Map filenames to product details
+// PRODUCT DETAILS: Only green tea product details
 const productDetails = {
-  "green-tea.html": {
+  "natural-remedies/green-tea.html": {
     name: "Green Tea",
     price: 1500,
     description: "Premium organic green tea with antioxidants and health benefits. Sourced from the finest tea gardens.",
     image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-  },
-  "vitamin-c.html": {
-    name: "Vitamin C Supplement",
-    price: 2500,
-    description: "High potency vitamin C for immune support and overall health.",
-    image: "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-  },
-  "protein-powder.html": {
-    name: "Protein Powder",
-    price: 4500,
-    description: "Premium whey protein powder for muscle recovery and growth.",
-    image: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
   }
-  // Add more product details here
 };
 // Handle language change
 function handleLanguageChange(lang) {
   if (lang === 'si') {
-    window.location.href = 'sinhala.html';
+    window.location.href = '../sinhala.html';
   } else if (lang === 'ta') {
-    window.location.href = 'tamil.html';
+    window.location.href = '../tamil.html';
   }
 }
 // Handle category change
