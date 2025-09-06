@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>மன-உடல் தொடர்பு - ஹோலிஸ்டிக் க்ளோ</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  :root{
+    --gold:#FFD700;
+    --gold-2:#FFA500;
+    --gold-3:#FFC107;
+    --dark:#0f0f10;
+    --glass: rgba(0,0,0,0.5);
+    --light-glass: rgba(255,255,255,0.1);
+    --accent: #4a6cf7;
+    --purple: #9d4edd;
+    --pink: #c77dff;
+    --blue: #7209b7;
+    --teal: #4cc9f0;
+    --green: #06ffa5;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{font-family:'Montserrat',sans-serif; color:#fff; scroll-behavior:smooth; overflow-x:hidden;}
+  body{
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
+    background-size:cover;
+    position: relative;
+  }
+  
+  /* Animated background particles */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 20%),
+      radial-gradient(circle at 90% 80%, rgba(255, 165, 0, 0.05) 0%, transparent 20%),
+      radial-gradient(circle at 50% 50%, rgba(74, 108, 247, 0.03) 0%, transparent 50%);
+    z-index: -1;
+    animation: float 20s infinite linear;
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-20px) rotate(1deg); }
+  }
+  
+  /* Header / Title */
+  header{ 
+    text-align:center; 
+    padding:40px 20px; 
+    background: linear-gradient(135deg, var(--glass) 0%, rgba(0,0,0,0.7) 100%);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+    animation: pulse 8s infinite alternate;
+    z-index: -1;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(0.8); opacity: 0.3; }
+    100% { transform: scale(1.2); opacity: 0.1; }
+  }
+  
+  header h1{
+    margin:0;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--gold);
+    position: relative;
+    display: inline-block;
+  }
+  
+  header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  
+  /* Language dropdown */
+  .language-select{
+    position:absolute; top:20px; right:20px; z-index:10;
+    padding:10px 15px; border-radius:8px; border:1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.7); color:#fff; font-weight:600; cursor:pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+  }
+  
+  .language-select:hover {
+    background: rgba(255,215,0,0.2);
+    border-color: var(--gold);
+  }
+  
+  /* Nav */
+  nav{
+    position:sticky; top:0; z-index:8;
+    display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+    padding:15px; background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  
+  nav a{
+    color:#fff; text-decoration:none; font-weight:600;
+    padding:10px 16px; border-radius:8px; transition:all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  nav a:hover::before {
+    left: 100%;
+  }
+  
+  nav a:hover{ 
+    background: rgba(255,255,255,0.15); 
+    transform: translateY(-2px);
+  }
+  
+  nav a.active{ 
+    background: linear-gradient(90deg,var(--gold),var(--gold-2)); 
+    color:#000;
+    box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+  }
+  
+  /* Mobile topic dropdown (dark) */
+  #nav-select{
+    display:none; width:92%; margin:15px auto 0;
+    padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.75); color:#fff; font-weight:600;
+  }
+  
+  /* Post Container */
+  .post-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+  
+  .post-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .post-page-title {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    color: var(--gold);
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+  
+  .post-page-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  
+  .post-page-content {
+    background: linear-gradient(135deg, var(--glass) 0%, rgba(0,0,0,0.6) 100%);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  
+  .post-page-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+  
+  .post-page-text h3 {
+    color: var(--gold);
+    margin: 25px 0 15px;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .post-page-text ul {
+    margin: 15px 0;
+    padding-left: 20px;
+  }
+  
+  .post-page-text li {
+    margin-bottom: 10px;
+  }
+  
+  .post-page-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+  }
+  
+  .back-to-posts {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-2));
+    color: var(--dark);
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+  }
+  
+  .back-to-posts:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255,215,0,0.4);
+  }
+  
+  .back-to-posts i {
+    margin-right: 8px;
+  }
+  
+  /* Footer + ScrollTop */
+  footer{ 
+    background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
+    padding:30px 20px; 
+    text-align:center; 
+    color:var(--gold); 
+    border-top:2px solid var(--gold); 
+    margin-top:40px; 
+    border-radius:20px 20px 0 0;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+  }
+  
+  footer p {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  
+  #scrollTopBtn{
+    position:fixed; 
+    right:30px; 
+    bottom:30px; 
+    z-index:30; 
+    display:none;
+    background:linear-gradient(135deg, var(--gold), var(--gold-2)); 
+    color:#000; 
+    border:none; 
+    width:50px; 
+    height:50px; 
+    border-radius:50%; 
+    font-size:20px; 
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(0,0,0,.32);
+    transition: all 0.3s ease;
+  }
+  
+  #scrollTopBtn:hover{ 
+    background:var(--gold-2);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  }
+  
+  /* Responsive */
+  @media (max-width: 900px){
+    nav{ display:none; }   /* use dropdown on mobile */
+    #nav-select{ display:block; }
+    
+    .post-page-image {
+      height: 300px;
+    }
+    
+    header {
+      padding: 30px 15px;
+    }
+    
+    header h1 {
+      font-size: clamp(1.8rem, 5vw, 2.2rem);
+    }
+  }
+</style>
+</head>
+<body>
+<!-- Language Selector -->
+<select class="language-select" id="language-select" onchange="handleLanguageChange(this.value)">
+  <option value="en">English</option>
+  <option value="si">සිංහල</option>
+  <option value="ta" selected>தமிழ்</option>
+</select>
+<header>
+  <h1>மன-உடல் தொடர்பு</h1>
+</header>
+<!-- Desktop Navigation -->
+<nav id="nav-bar">
+  <a href="index-t.html">முகப்பு</a>
+  <a href="health-t.html" class="active">சுகாதாரம் & நல்வாழ்வு</a>
+  <a href="selflove-t.html">சுய அன்பு & மன ஆரோக்கியம்</a>
+  <a href="relationships-t.html">உறவுகள் & குடும்பம்</a>
+  <a href="education-t.html">கல்வி & அறிவு</a>
+  <a href="motivation-t.html">ஊக்கமளித்தல் & உத்வேகம்</a>
+  <a href="spirituality-t.html">ஆன்மீகம் & ஈர்ப்பு விதி</a>
+  <a href="lifestyle-t.html">வாழ்க்கை முறை & அன்றாட வாழ்க்கை</a>
+  <a href="finance-t.html">நிதி & தொழில்</a>
+  <a href="trending-t.html">போக்குகள் & உலக செய்திகள்</a>
+  <a href="nature-t.html">இயற்கை & சுற்றுச்சூழல்</a>
+  <a href="technology-t.html">தொழில்நுட்பம் & புதுமை</a>
+  <a href="community-t.html">சமூகக் கதைகள்</a>
+</nav>
+<!-- Mobile Navigation Dropdown (dark) -->
+<select id="nav-select" onchange="handleTopicChange(this.value)">
+  <option value="index-t.html">முகப்பு</option>
+  <option value="health-t.html" selected>சுகாதாரம் & நல்வாழ்வு</option>
+  <option value="selflove-t.html">சுய அன்பு & மன ஆரோக்கியம்</option>
+  <option value="relationships-t.html">உறவுகள் & குடும்பம்</option>
+  <option value="education-t.html">கல்வி & அறிவு</option>
+  <option value="motivation-t.html">ஊக்கமளித்தல் & உத்வேகம்</option>
+  <option value="spirituality-t.html">ஆன்மீகம் & ஈர்ப்பு விதி</option>
+  <option value="lifestyle-t.html">வாழ்க்கை முறை & அன்றாட வாழ்க்கை</option>
+  <option value="finance-t.html">நிதி & தொழில்</option>
+  <option value="trending-t.html">போக்குகள் & உலக செய்திகள்</option>
+  <option value="nature-t.html">இயற்கை & சுற்றுச்சூழல்</option>
+  <option value="technology-t.html">தொழில்நுட்பம் & புதுமை</option>
+  <option value="community-t.html">சமூகக் கதைகள்</option>
+</select>
+<!-- Post Container -->
+<div class="post-container">
+  <div class="post-header">
+    <h2 class="post-page-title">மன-உடல் தொடர்பு</h2>
+  </div>
+  
+  <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="மன-உடல் தொடர்பு" class="post-page-image">
+  
+  <div class="post-page-content">
+    <div class="post-page-text">
+      <p>மனம் மற்றும் உடல் உள்ளார்ந்து இணைக்கப்பட்டுள்ளன, ஒவ்வொன்றும் மற்றதை ஆழமான வழிகளில் பாதிக்கும் ஒரு சிக்கலான உறவை உருவாக்குகின்றன. இந்த மன-உடல் தொடர்பு முழுமையான ஆரோக்கியத்தின் இதயத்தில் உள்ளது, எங்கள் மன, உணர்ச்சி மற்றும் உடல் நிலைகள் ஆழமாக ஒன்றோடொன்று இணைக்கப்பட்டுள்ளன என்பதை அங்கீகரிக்கிறது. இந்த தொடர்பைப் புரிந்துகொள்வது மற்றும் வளர்ப்பது மேம்படுத்தப்பட்ட ஆரோக்கியம், அதிக நல்வாழ்வு மற்றும் சமநிலையான வாழ்க்கைக்கு வழிவகுக்கும்.</p>
+      
+      <h3>மன-உடல் தொடர்பைப் புரிந்துகொள்வது</h3>
+      <p>மன-உடல் தொடர்பு என்பது எங்கள் எண்ணங்கள், உணர்வுகள், நம்பிக்கைகள் மற்றும் அணுகுமுறைகளுக்கும் எங்கள் உடல் ஆரோக்கியத்திற்கும் இடையேயான உறவைக் குறிக்கிறது. இந்த தொடர்பு இரண்டு திசைகளிலும் செயல்படுகிறது: எங்கள் மன நிலை எங்கள் உடல் ஆரோக்கியத்தை பாதிக்கிறது, மேலும் எங்கள் உடல் நிலை எங்கள் மன நலத்தை பாதிக்கிறது. உதாரணமாக, மன அழுத்தம் தலைவலி அல்லது அதிக இரத்த அழுத்தம் போன்ற உடல் அறிகுறிகளை ஏற்படுத்தலாம், அதே சமயம் நாள்பட்ட வலி மனச்சோர்வு அல்லது பதட்டத்திற்கு வழிவகுக்கும்.</p>
+      
+      <h3>தொடர்பின் பின்னால் உள்ள அறிவியல்</h3>
+      <p>அறிவியல் ஆராய்ச்சி மன-உடல் தொடர்பை அதிகமாக சரிபார்த்துள்ளது. நரம்பு மண்டலம், எண்டோக்ரைன் மண்டலம் மற்றும் நோயெதிர்ப்பு மண்டலம் தொடர்ந்து தகவல்தொடர்பு கொள்கின்றன, இது எங்கள் மன மற்றும் உடல் அனுபவங்களை இணைக்கும் ஒரு பிணையத்தை உருவாக்குகிறது. நாம் உணர்ச்சிகளை அனுபவிக்கும்போது, எங்கள் உடல்கள் பல்வேறு உடல் செயல்பாடுகளை பாதிக்கும் ஹார்மோன்கள் மற்றும் நியூரோடிரான்ஸ்மிட்டர்களை வெளியிடுகின்றன. இதேபோல், உடல் நிலைகள் மூளை வேதியியலை மாற்றி எங்கள் மனநிலை மற்றும் அறிவாற்றல் செயல்பாட்டை பாதிக்கும்.</p>
+      
+      <h3>மன-உடல் தொடர்பை மேம்படுத்தும் நுட்பங்கள்</h3>
+      <p>மேம்படுத்தப்பட்ட ஆரோக்கியம் மற்றும் நல்வாழ்வுக்காக மன-உடல் தொடர்பை வலுப்படுத்தவும் பயன்படுத்தவும் பல பயனுள்ள நுட்பங்கள் உள்ளன:</p>
+      
+      <ul>
+        <li><strong>மைண்ட்ஃபுல்னெஸ் தியானம்:</strong> வழக்கமான தியான பயிற்சி தற்போதைய தருணத்தின் விழிப்புணர்வை வளர்க்க உதவுகிறது, மன அழுத்தத்தை குறைக்கிறது மற்றும் தளர்வை ஊக்குவிக்கிறது. ஆய்வுகள் தியானம் இரத்த அழுத்தத்தை குறைக்கும், உறக்கத்தை மேம்படுத்தும், மற்றும் நோயெதிர்ப்பு செயல்பாட்டை மேம்படுத்தும் என்பதைக் காட்டுகின்றன.</li>
+        <li><strong>ஆழமான சுவாச பயிற்சிகள்:</strong> உணர்வுள்ள சுவாஸ நுட்பங்கள் பாராசிம்பதெடிக் நரம்பு மண்டலத்தை செயல்படுத்துகின்றன, இது மன அழுத்த பதிலை எதிர்க்கிறது. வயிற்று சுவாசம் போன்ற எளிய பயிற்சிகள் விரைவாக அமைதியான நிலையை தூண்டலாம்.</li>
+        <li><strong>யோகா மற்றும் தாய் சி:</strong> இந்த இயக்க பயிற்சிகள் உடல் நிலைகள், சுவாஸ நுட்பங்கள் மற்றும் தியானத்தை இணைத்து மன-உடல் தொடர்பை வலுப்படுத்துகின்றன. அவை நெகிழ்வுத்தன்மை, சமநிலை மற்றும் வலிமையை மேம்படுத்துகின்றன, அதே சமயம் மன அழுத்தம் மற்றும் பதட்டத்தை குறைக்கின்றன.</li>
+        <li><strong>படிப்படியான தசை தளர்வு:</strong> இந்த நுட்பம் வெவ்வேறு தசை குழுக்களை இறுக்கி பின்னர் தளர்வுபடுத்துவதை உள்ளடக்கியது, உடல் பதற்றத்தை வெளியேற்ற உதவுகிறது மற்றும் உடல் உணர்வுகளின் விழிப்புணர்வை ஊக்குவிக்கிறது.</li>
+        <li><strong>வழிகாட்டப்பட்ட கற்பனை:</strong> தளர்வு மற்றும் குணப்படுத்துதலை ஊக்குவிக்க மன படங்களை உருவாக்க காட்சிப்படுத்தலைப் பயன்படுத்துவது வலி குறைத்தல் முதல் நோயெதிர்ப்பு செயல்பாட்டை மேம்படுத்துதல் வரை உடல் ஆரோக்கியத்தில் உணரக்கூடிய விளைவுகளை ஏற்படுத்தலாம்.</li>
+      </ul>
+      
+      <h3>உடலில் மன அழுத்தத்தின் தாக்கம்</h3>
+      <p>நாள்பட்ட மன அழுத்தம் என்பது மன-உடல் தொடர்பின் மிக முக்கியமான குலைப்பான்களில் ஒன்றாகும். நாம் மன அழுத்தத்திற்கு உள்ளாகும்போது, எங்கள் உடல்கள் "சண்டை அல்லது வெளியேறு" க்கு தயாராகும் கார்டிசோல் மற்றும் அட்ரினலின் ஹார்மோன்களை வெளியிடுகின்றன. இந்த பதில் குறுகிய கால சூழ்நிலைகளில் நன்மை பயக்கும் என்றாலும், நாள்பட்ட மன அழுத்தம் எங்கள் உடல்களை தொடர்ந்து அதிக எச்சரிக்கை நிலையில் வைக்கிறது, இது பின்வருவனவற்றிற்கு வழிவகுக்கிறது:</p>
+      
+      <ul>
+        <li>பலவீனமான நோயெதிர்ப்பு மண்டலம்</li>
+        <li>இதய குழல் சிக்கல்கள்</li>
+        <li>செரிமான பிரச்சினைகள்</li>
+        <li>தசை பதற்றம் மற்றும் வலி</li>
+        <li>உறக்க குலைவுகள்</li>
+        <li>பதட்டம் மற்றும் மனச்சோர்வு போன்ற மன ஆரோக்கிய சவால்கள்</li>
+      </ul>
+      
+      <p>மன-உடல் நுட்பங்கள் மூலம் மன அழுத்தத்தை நிர்வகிப்பது இந்த விளைவுகளை குறைக்கவும் மனம் மற்றும் உடலுக்கு சமநிலையை மீட்டெடுக்கவும் உதவும்.</p>
+      
+      <h3>நேர்மறையான சிந்தனையின் பங்கு</h3>
+      <p>எங்கள் எண்ணங்கள் மற்றும் நம்பிக்கைகள் உடல் ஆரோக்கியத்தில் சக்திவாய்ந்த தாக்கத்தை ஏற்படுத்துகின்றன. நேர்மறையான சிந்தனை மற்றும் மேம்பாட்டு நிலை பின்வருவனவற்றுடன் தொடர்புடையது:</p>
+      
+      <ul>
+        <li>அதிகரித்த ஆயுள்</li>
+        <li>மனச்சோர்வு குறைந்த விகிதங்கள்</li>
+        <li>இதய நோய் ஆபத்து குறைந்தது</li>
+        <li>சிரமங்களின் போது சிறந்த போராட்ட திறன்கள்</li>
+        <li>வலுவான நோயெதிர்ப்பு மண்டலம்</li>
+      </ul>
+      
+      <p>நேர்மறையான மனப்பான்மையை வளர்ப்பது என்பது வாழ்க்கையின் சவால்களை புறக்கணிப்பது அல்ல, மாறாக அவற்றை ஒரு கட்டுமானமான மற்றும் நம்பிக்கையுடன் அணுகுவதாகும். நன்றி பத்திரிகை, உறுதிப்படுத்தல்கள் மற்றும் அறிவாற்றல் மறுசீரமைப்பு போன்ற பயிற்சிகள் நேர்மறையான சிந்தனை முறைகளை வளர்க்க உதவும்.</p>
+      
+      <h3>ஊட்டச்சத்து மற்றும் மன-உடல் தொடர்பு</h3>
+      <p>நாம் என்ன சாப்பிடுகிறோம் என்பது எங்கள் உடல் மற்றும் மன ஆரோக்கியத்தை கணிசமாக பாதிக்கிறது. குடல்-மூளை அச்சு என்பது ஜீரண பாதை மற்றும் மூளைக்கு இடையேயான இருதிசை தகவல்தொடர்பு அமைப்பாகும். ஆரோக்கியமான குடல் நுண்ணுயிரிகள் ஜீரணத்தை மட்டுமல்லாமல் மன ஆரோக்கியத்தையும் ஆதரிக்கின்றன, மனநிலை, மன அழுத்த பதில் மற்றும் அறிவாற்றல் செயல்பாட்டை பாதிக்கின்றன.</p>
+      
+      <p>ஒமேகா-3 கொழுப்பு அமிலங்கள், ஆக்ஸிஜனேற்ற எதிர்ப்பு மற்றும் ப்ரோபயோடிக்ஸ் நிறைந்த உணவுகள் மூளை ஆரோக்கியம் மற்றும் உணர்ச்சி நலனை ஆதரிக்கலாம். மாறாக, பதப்படுத்தப்பட்ட உணவுகள், அதிக சர்க்கரை மற்றும் ஆரோக்கியமற்ற கொழுப்புகள் அழற்சியை ஏற்படுத்தி மனநிலை மற்றும் அறிவாற்றல் செயல்பாட்டை எதிர்மறையாக பாதிக்கலாம்.</p>
+      
+      <h3>தினசரி வாழ்க்கையில் மன-உடல் பயிற்சிகளை ஒருங்கிணைத்தல்</h3>
+      <p>உங்கள் தினசரி நடைமுறையில் மன-உடல் பயிற்சிகளை இணைப்பது சிக்கலானதாகவோ அல்லது நேரம் எடுப்பதாகவோ இருக்க வேண்டாம். சிறிய, தொடர்ச்சியான செயல்கள் கணிசமான நன்மைகளை தரலாம்:</p>
+      
+      <ul>
+        <li>ஐந்து நிமிடங்கள் ஆழமான சுவாசம் அல்லது தியானத்துடன் உங்கள் நாளைத் தொடங்கவும்</li>
+        <li>நாள் முழுவதும் சிறிய இடைவெளிகளை எடுத்து நீட்டிக்கவும் மற்றும் உங்கள் உடலுடன் சரிபார்க்கவும்</li>
+        <li>ஒவ்வொரு கவனமாக சாப்பிடுவதன் மூலம் மன உணவு உட்கொள்ளுங்கள், ஒவ்வொரு கவளத்தையும் ருசித்து பசி மற்றும் நிறைவு சமிக்ஞைகளை கவனியுங்கள்</li>
+        <li>நன்றி பிரதிபலிப்பு அல்லது மென்மையான நீட்டலுடன் உங்கள் நாளை முடிக்கவும்</li>
+        <li>நீங்கள் ரசிக்கும் வழக்கமான உடல் செயல்பாட்டில் ஈடுபடுங்கள்</li>
+      </ul>
+      
+      <h3>முடிவு</h3>
+      <p>மன-உடல் தொடர்பு என்பது முழுமையான ஆரோக்கியத்தின்�ரு சக்திவாய்ந்த அம்சமாகும், இது எங்கள் மன, உணர்ச்சி மற்றும் உடல் நல்வாழ்வின் பரஸ்பர சார்பை அங்கீகரிக்கிறது. மைண்ட்ஃபுல்னெஸ், இயக்கம், ஊட்டச்சத்து மற்றும் நேர்மறையான சிந்தனை மூலம் இந்த தொடர்பைப் புரிந்துகொள்வது மற்றும் வளர்ப்பது மூலம், நாம் அதிக சமநிலை, தடைத்திறன் மற்றும் ஒட்டுமொத்த ஆரோக்கியத்தை அடையலாம். சிறிய, தொடர்ச்சியான பயிற்சிகள் காலப்போக்கில் ஆழமான மாற்றங்களை ஏற்படுத்தும், உங்கள் சிறந்த நல்வாழ்வுக்கான பயணத்தை ஆதரிக்கும் என்பதை நினைவில் கொள்ளுங்கள்.</p>
+    </div>
+    
+    <div class="post-page-meta">
+      <div class="post-date">
+        <i class="far fa-calendar-alt"></i>
+        <span>ஏப்ரல் 28, 2023</span>
+      </div>
+      <div class="post-category">
+        <i class="far fa-folder"></i>
+        <span>சுகாதாரம் & நல்வாழ்வு</span>
+      </div>
+    </div>
+  </div>
+  
+  <a href="../health-t.html" class="back-to-posts">
+    <i class="fas fa-arrow-left"></i> சுகாதார கட்டுரைகளுக்குத் திரும்பு
+  </a>
+</div>
+<!-- Footer -->
+<footer>
+  <p>© 2025 ஹோலிஸ்டிக் க்ளோ. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.</p>
+</footer>
+<button id="scrollTopBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">&#8679;</button>
+<script>
+// Handle language change - redirect to language-specific page
+function handleLanguageChange(lang) {
+  if (lang === 'si') {
+    window.location.href = '../sinhala.html';
+  } else if (lang === 'ta') {
+    window.location.href = '../tamil.html';
+  }
+}
+// Handle topic change - redirect to topic-specific page
+function handleTopicChange(topicPage) {
+  window.location.href = topicPage;
+}
+/* ===== Scroll-to-top visibility ===== */
+window.addEventListener('scroll', ()=>{ 
+  document.getElementById('scrollTopBtn').style.display=((document.documentElement.scrollTop || document.body.scrollTop)>120) ? 'grid':'none'; 
+});
+</script>
+</body>
+</html>
