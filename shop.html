@@ -28,6 +28,7 @@
                 url('https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
     background-size:cover;
     position: relative;
+    background-color: #121212;
   }
   
   /* Animated background particles */
@@ -122,7 +123,6 @@
   
   /* Mobile Category Dropdown */
   .mobile-category-select {
-    display: block;
     width: 90%;
     margin: 20px auto;
     padding: 12px 15px;
@@ -358,7 +358,7 @@
     margin-right: 10px;
   }
   
-  /* Categories Section - Desktop Only */
+  /* Categories Section - Now visible on all devices */
   .categories-section {
     max-width: 1200px;
     margin: 40px auto;
@@ -366,10 +366,10 @@
     display: block;
   }
   
-  /* Categories grid - 3 columns on desktop */
+  /* Categories grid - Responsive */
   .categories-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
     margin-top: 30px;
   }
@@ -483,12 +483,8 @@
   /* Responsive */
   @media (max-width: 900px){
     .categories-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 20px;
-    }
-    
-    .categories-section {
-      display: none;
     }
     
     .mobile-category-select {
@@ -518,8 +514,8 @@
       display: none;
     }
     
-    .categories-section {
-      display: block;
+    .categories-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 </style>
@@ -537,7 +533,7 @@
 <!-- Mobile Category Dropdown -->
 <select class="mobile-category-select" id="mobile-category-select" onchange="handleMobileCategoryChange(this.value)">
   <option value="all">All Products</option>
-  <option value="..netural-remedies">Natural Ramedies</option>
+  <option value="natural-remedies">Natural Remedies</option>
   <option value="electronics">Electronics</option>
   <option value="fashion">Fashion</option>
   <option value="home-kitchen">Home & Kitchen</option>
@@ -569,13 +565,13 @@
     </button>
   </div>
 </div>
-<!-- Categories Section - Desktop Only -->
+<!-- Categories Section - Now visible on all devices -->
 <div class="categories-section">
   <h2 class="section-title">Shop by Category</h2>
   <div class="categories-grid">
     <!-- Natural Remedies Category -->
-    <a href="../natural-ramedies.html" class="category-card">
-      <img src="https://images.unsplash.com/photo-1600830292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Natural Ramedies" class="category-image">
+    <a href="../natural-remedies.html" class="category-card">
+      <img src="https://images.unsplash.com/photo-1600830292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Natural Remedies" class="category-image">
       <div class="category-content">
         <h3 class="category-title">Natural Remedies</h3>
         <p class="category-description">Natural supplements, herbal remedies, and wellness products for a healthier lifestyle.</p>
@@ -640,16 +636,6 @@
         <h3 class="category-title">Spare Parts</h3>
         <p class="category-description">High-quality replacement parts for electronics, vehicles, and home appliances.</p>
         <div class="category-count">3 Products</div>
-      </div>
-    </a>
-    
-    <!-- All Products Category -->
-    <a href="shop.html" class="category-card">
-      <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="All Products" class="category-image">
-      <div class="category-content">
-        <h3 class="category-title">All Products</h3>
-        <p class="category-description">Browse our complete catalog of products from all categories in one place.</p>
-        <div class="category-count">20+ Products</div>
       </div>
     </a>
   </div>
@@ -768,4 +754,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
-
