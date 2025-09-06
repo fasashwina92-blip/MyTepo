@@ -622,10 +622,10 @@
 <script>
 // Handle language change - redirect to language-specific page
 function handleLanguageChange(lang) {
-  if (lang === 'health-sinhala.html') {
-    window.location.href = 'health-sinhala.html';
-  } else if (lang === 'health-tamil.html') {
-    window.location.href = 'health-tamil.html';
+  if (lang === 'health-s.html') {
+    window.location.href = 'health-s.html';
+  } else if (lang === 'health-t.html') {
+    window.location.href = 'health-t.html';
   }
 }
 // Handle topic change - redirect to topic-specific page
@@ -639,8 +639,8 @@ window.addEventListener('scroll', ()=>{
 // Function to extract content from a post HTML file
 async function extractPostContent(postFile) {
   try {
-    console.log(`Attempting to load: health/${postFile}.html`);
-    const response = await fetch(`health/${postFile}.html`);
+    console.log(`Attempting to load: health-t/${postFile}.html`);
+    const response = await fetch(`health-t/${postFile}.html`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -679,7 +679,7 @@ async function extractPostContent(postFile) {
       imageUrl,
       excerpt,
       date,
-      url: `health/${postFile}.html`
+      url: `health-t/${postFile}.html`
     };
   } catch (error) {
     console.error(`Error extracting content from ${postFile}:`, error);
