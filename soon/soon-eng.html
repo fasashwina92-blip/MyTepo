@@ -124,13 +124,13 @@
     border-color: var(--gold);
   }
   
-  /* Back to Home Button */
-  .back-to-home-container {
+  /* Back to Shop Button */
+  .back-to-shop-container {
     text-align: center;
     margin: 20px 0;
   }
   
-  .back-to-home {
+  .back-to-shop {
     display: inline-block;
     padding: 12px 24px;
     background: linear-gradient(135deg, var(--gold), var(--gold-2));
@@ -142,12 +142,12 @@
     box-shadow: 0 4px 15px rgba(255,215,0,0.3);
   }
   
-  .back-to-home:hover {
+  .back-to-shop:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(255,215,0,0.4);
   }
   
-  .back-to-home i {
+  .back-to-shop i {
     margin-right: 8px;
   }
   
@@ -301,17 +301,17 @@
 <body>
 <!-- Language Selector -->
 <select class="language-select" id="language-select" onchange="handleLanguageChange(this.value)">
-  <option value="en">English</option>
+  <option value="en" selected>English</option>
   <option value="si">සිංහල</option>
   <option value="ta">தமிழ்</option>
 </select>
 <header>
   <h1>HOLISTIC GLOW</h1>
 </header>
-<!-- Back to Home Button -->
-<div class="back-to-home-container">
-  <a href="..../index.html" class="back-to-home">
-    <i class="fas fa-home"></i> Back to Home
+<!-- Back to Shop Button -->
+<div class="back-to-shop-container">
+  <a href="../shop.html" class="back-to-shop">
+    <i class="fas fa-shopping-bag"></i> Back to Shop
   </a>
 </div>
 <!-- Coming Soon Container -->
@@ -339,9 +339,9 @@
 // Handle language change - redirect to language-specific page
 function handleLanguageChange(lang) {
   if (lang === 'si') {
-    window.location.href = './sinhala.html';
+    window.location.href = '../soon/soon-sin.html';
   } else if (lang === 'ta') {
-    window.location.href = './tamil.html';
+    window.location.href = '../soon/soon-tam.html';
   }
 }
 
