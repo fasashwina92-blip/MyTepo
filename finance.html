@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Finance & Career - Holistic Glow</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  :root{
+    --gold:#FFD700;
+    --gold-2:#FFA500;
+    --gold-3:#FFC107;
+    --dark:#0f0f10;
+    --glass: rgba(0,0,0,0.5);
+    --light-glass: rgba(255,255,255,0.1);
+    --accent: #4a6cf7;
+    --purple: #9d4edd;
+    --pink: #c77dff;
+    --blue: #7209b7;
+    --teal: #4cc9f0;
+    --green: #06ffa5;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{font-family:'Montserrat',sans-serif; color:#fff; scroll-behavior:smooth; overflow-x:hidden;}
+  body{
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
+    background-size:cover;
+    position: relative;
+  }
+  
+  /* Animated background particles */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 20%),
+      radial-gradient(circle at 90% 80%, rgba(255, 165, 0, 0.05) 0%, transparent 20%),
+      radial-gradient(circle at 50% 50%, rgba(74, 108, 247, 0.03) 0%, transparent 50%);
+    z-index: -1;
+    animation: float 20s infinite linear;
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-20px) rotate(1deg); }
+  }
+  
+  /* Header / Title */
+  header{ 
+    text-align:center; 
+    padding:60px 20px; 
+    background: linear-gradient(135deg, var(--glass) 0%, rgba(0,0,0,0.7) 100%);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+    animation: pulse 8s infinite alternate;
+    z-index: -1;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(0.8); opacity: 0.3; }
+    100% { transform: scale(1.2); opacity: 0.1; }
+  }
+  
+  header h1{
+    margin:0;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 900;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow:
+      0 0 10px rgba(255,215,0,0.3),
+      0 2px 4px rgba(0,0,0,0.5),
+      0 4px 8px rgba(0,0,0,0.3);
+    position: relative;
+    display: inline-block;
+  }
+  
+  header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  
+  /* Language dropdown */
+  .language-select{
+    position:absolute; top:20px; right:20px; z-index:10;
+    padding:10px 15px; border-radius:8px; border:1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.7); color:#fff; font-weight:600; cursor:pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+  }
+  
+  .language-select:hover {
+    background: rgba(255,215,0,0.2);
+    border-color: var(--gold);
+  }
+  
+  /* Nav */
+  nav{
+    position:sticky; top:0; z-index:8;
+    display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+    padding:15px; background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  
+  nav a{
+    color:#fff; text-decoration:none; font-weight:600;
+    padding:10px 16px; border-radius:8px; transition:all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  nav a:hover::before {
+    left: 100%;
+  }
+  
+  nav a:hover{ 
+    background: rgba(255,255,255,0.15); 
+    transform: translateY(-2px);
+  }
+  
+  nav a.active{ 
+    background: linear-gradient(90deg,var(--gold),var(--gold-2)); 
+    color:#000;
+    box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+  }
+  
+  /* Mobile topic dropdown (dark) */
+  #nav-select{
+    display:none; width:92%; margin:15px auto 0;
+    padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.75); color:#fff; font-weight:600;
+  }
+  
+  /* Welcome Message */
+  .welcome-message {
+    text-align: center;
+    padding: 40px 20px;
+    margin: 20px auto;
+    max-width: 1000px;
+    background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.8) 100%);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  
+  .welcome-message h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--gold);
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+  
+  .welcome-message p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+  
+  /* Recent posts grid */
+  #posts-container{ 
+    display:grid; 
+    grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); 
+    gap:25px; 
+    margin-top:25px; 
+  }
+  
+  .post{
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    padding:20px; 
+    border-radius:16px;
+    display:flex; 
+    flex-direction:column; 
+    transition:all 0.4s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .post::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-2));
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+  }
+  
+  .post:hover::before {
+    transform: translateX(0);
+  }
+  
+  .post img{ 
+    width:100%; 
+    height:200px; 
+    object-fit:cover; 
+    border-radius:12px; 
+    margin-bottom:15px;
+    transition: transform 0.5s ease;
+  }
+  
+  .post:hover img {
+    transform: scale(1.05);
+  }
+  
+  .post:hover{ 
+    transform:translateY(-8px); 
+    box-shadow:0 15px 30px rgba(0,0,0,.5);
+    border-color: rgba(255,215,0,0.3);
+  }
+  
+  .post h3{ 
+    margin:10px 0 8px; 
+    font-size:1.3rem; 
+    font-weight:700;
+  }
+  
+  .post p{ 
+    flex:1; 
+    opacity:.95; 
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+  
+  .post small{ 
+    color:#ddd; 
+    margin-top: 10px;
+    display: block;
+    font-size: 0.85rem;
+  }
+  
+  .read-more {
+    color: var(--gold);
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 10px;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+  
+  .read-more:hover {
+    text-decoration: underline;
+    transform: translateX(5px);
+  }
+  
+  .post-content {
+    margin-bottom: 15px;
+  }
+  
+  .post-content.full {
+    display: block;
+  }
+  
+  .post-content.truncated {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  /* Footer + ScrollTop */
+  footer{ 
+    background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
+    padding:30px 20px; 
+    text-align:center; 
+    color:var(--gold); 
+    border-top:2px solid var(--gold); 
+    margin-top:40px; 
+    border-radius:20px 20px 0 0;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+  }
+  
+  footer p {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  
+  #scrollTopBtn{
+    position:fixed; 
+    right:30px; 
+    bottom:30px; 
+    z-index:30; 
+    display:none;
+    background:linear-gradient(135deg, var(--gold), var(--gold-2)); 
+    color:#000; 
+    border:none; 
+    width:50px; 
+    height:50px; 
+    border-radius:50%; 
+    font-size:20px; 
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(0,0,0,.32);
+    transition: all 0.3s ease;
+  }
+  
+  #scrollTopBtn:hover{ 
+    background:var(--gold-2);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  }
+  
+  /* Responsive */
+  @media (max-width: 900px){
+    nav{ display:none; }   /* use dropdown on mobile */
+    #nav-select{ display:block; }
+    
+    section {
+      padding: 35px 20px;
+      margin: 20px 15px;
+    }
+    
+    #posts-container {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    
+    header {
+      padding: 40px 15px;
+    }
+    
+    header h1 {
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+    }
+    
+    .welcome-message {
+      padding: 30px 15px;
+    }
+  }
+</style>
+</head>
+<body>
+<!-- Language Selector -->
+<select class="language-select" id="language-select" onchange="handleLanguageChange(this.value)">
+  <option value="en">English</option>
+  <option value="si">සිංහල</option>
+  <option value="ta">தமிழ்</option>
+</select>
+<header>
+  <h1>Finance & Career</h1>
+</header>
+<!-- Desktop Navigation -->
+<nav id="nav-bar">
+  <a href="health.html">Health & Wellness</a>
+  <a href="selflove.html">Self Love & Mental Health</a>
+  <a href="relationships.html">Relationships & Family</a>
+  <a href="education.html">Education & Knowledge</a>
+  <a href="motivation.html">Motivation & Inspiration</a>
+  <a href="spirituality.html">Spirituality & Law of Attraction</a>
+  <a href="lifestyle.html">Lifestyle & Daily Living</a>
+  <a href="finance.html" class="active">Finance & Career</a>
+  <a href="trending.html">Trending & World News</a>
+  <a href="nature.html">Nature & Environment</a>
+  <a href="technology.html">Technology & Innovation</a>
+  <a href="community.html">Community Stories</a>
+</nav>
+<!-- Mobile Navigation Dropdown (dark) -->
+<select id="nav-select" onchange="handleTopicChange(this.value)">
+  <option value="health.html">Health & Wellness</option>
+  <option value="selflove.html">Self Love & Mental Health</option>
+  <option value="relationships.html">Relationships & Family</option>
+  <option value="education.html">Education & Knowledge</option>
+  <option value="motivation.html">Motivation & Inspiration</option>
+  <option value="spirituality.html">Spirituality & Law of Attraction</option>
+  <option value="lifestyle.html">Lifestyle & Daily Living</option>
+  <option value="finance.html" selected>Finance & Career</option>
+  <option value="trending.html">Trending & World News</option>
+  <option value="nature.html">Nature & Environment</option>
+  <option value="technology.html">Technology & Innovation</option>
+  <option value="community.html">Community Stories</option>
+</select>
+<!-- Welcome Message -->
+<div class="welcome-message">
+  <h2>Financial Wellness & Career Fulfillment</h2>
+  <p>Develop a healthy relationship with money and build a fulfilling professional life. Learn practical financial strategies, career advancement techniques, and productivity methods that support both prosperity and purpose.</p>
+</div>
+<!-- Recent Posts Section -->
+<section id="recent-posts"><h2 onclick="renderPosts('finance')">Recent Posts</h2>
+  <div id="posts-container">
+    <!-- Sample Post 1 -->
+    <div class="post">
+      <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Financial Planning">
+      <h3>Building a Solid Financial Foundation: Beyond Budgeting</h3>
+      <div class="post-content truncated">
+        <p>Financial wellness goes beyond simple budgeting—it's about creating a comprehensive system that supports your life goals and values. This guide explores advanced financial planning strategies including debt management, investment fundamentals, emergency fund creation, and long-term wealth building. Learn how to develop a healthy money mindset that balances practical financial responsibility with enjoying life's pleasures.</p>
+      </div>
+      <a class="read-more">Read More</a>
+      <small>June 25, 2023</small>
+    </div>
+    
+    <!-- Sample Post 2 -->
+    <div class="post">
+      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Career Growth">
+      <h3>Navigating Career Transitions with Confidence and Purpose</h3>
+      <div class="post-content truncated">
+        <p>Changing careers can be both exciting and daunting. This comprehensive guide provides a roadmap for successful career transitions, from self-assessment and skill development to networking and interview strategies. Discover how to identify transferable skills, overcome imposter syndrome, and position yourself for success in a new field while maintaining financial stability during the transition period.</p>
+      </div>
+      <a class="read-more">Read More</a>
+      <small>June 12, 2023</small>
+    </div>
+  </div>
+</section>
+<!-- Footer -->
+<footer>
+  <p>© 2025 Holistic Glow. All rights reserved.</p>
+</footer>
+<button id="scrollTopBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">&#8679;</button>
+<script>
+// Handle language change - redirect to language-specific page
+function handleLanguageChange(lang) {
+  if (lang === 'si') {
+    window.location.href = 'sinhala.html';
+  } else if (lang === 'ta') {
+    window.location.href = 'tamil.html';
+  }
+}
+// Handle topic change - redirect to topic-specific page
+function handleTopicChange(topicPage) {
+  window.location.href = topicPage;
+}
+// Array to store posts locally
+let posts = [
+  {
+    title: "Building a Solid Financial Foundation: Beyond Budgeting",
+    desc: "Financial wellness goes beyond simple budgeting—it's about creating a comprehensive system that supports your life goals and values. This guide explores advanced financial planning strategies including debt management, investment fundamentals, emergency fund creation, and long-term wealth building. Learn how to develop a healthy money mindset that balances practical financial responsibility with enjoying life's pleasures.",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    topic: "finance",
+    date: "June 25, 2023"
+  },
+  {
+    title: "Navigating Career Transitions with Confidence and Purpose",
+    desc: "Changing careers can be both exciting and daunting. This comprehensive guide provides a roadmap for successful career transitions, from self-assessment and skill development to networking and interview strategies. Discover how to identify transferable skills, overcome imposter syndrome, and position yourself for success in a new field while maintaining financial stability during the transition period.",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    topic: "finance",
+    date: "June 12, 2023"
+  }
+];
+// Function to render posts based on topic
+function renderPosts(filterTopic = "") {
+  const container = document.getElementById('posts-container');
+  container.innerHTML = ""; // clear previous posts
+  
+  // Filter posts if a topic is selected
+  const filtered = filterTopic ? posts.filter(p => p.topic === filterTopic) : posts;
+  
+  filtered.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'post';
+    
+    // Create a unique ID for this post
+    const postId = 'post-' + Math.random().toString(36).substr(2, 9);
+    
+    // Create content div with truncated text
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'post-content truncated';
+    contentDiv.id = postId + '-content';
+    
+    // Fix: Use innerHTML to preserve formatting
+    contentDiv.innerHTML = p.desc;
+    
+    // Create read more link
+    const readMoreLink = document.createElement('a');
+    readMoreLink.className = 'read-more';
+    readMoreLink.textContent = 'Read More';
+    readMoreLink.href = '#';
+    readMoreLink.onclick = function(e) {
+      e.preventDefault();
+      const content = document.getElementById(postId + '-content');
+      if (content.classList.contains('truncated')) {
+        content.classList.remove('truncated');
+        content.classList.add('full');
+        this.textContent = 'Read Less';
+      } else {
+        content.classList.remove('full');
+        content.classList.add('truncated');
+        this.textContent = 'Read More';
+      }
+    };
+    
+    // Add image if it exists
+    if (p.image) {
+      const img = document.createElement('img');
+      img.src = p.image;
+      img.alt = p.title;
+      img.loading = 'lazy'; // Add lazy loading for images
+      div.appendChild(img);
+    }
+    
+    // Add title
+    const title = document.createElement('h3');
+    title.textContent = p.title;
+    div.appendChild(title);
+    
+    // Add content
+    div.appendChild(contentDiv);
+    div.appendChild(readMoreLink);
+    
+    // Add date
+    const dateElement = document.createElement('small');
+    dateElement.textContent = p.date;
+    div.appendChild(dateElement);
+    
+    container.appendChild(div);
+  });
+}
+/* ===== Scroll-to-top visibility ===== */
+window.addEventListener('scroll', ()=>{ 
+  document.getElementById('scrollTopBtn').style.display=((document.documentElement.scrollTop || document.body.scrollTop)>120) ? 'grid':'none'; 
+});
+</script>
+</body>
+</html>
