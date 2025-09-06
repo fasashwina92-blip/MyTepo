@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>சமச்சீரான வாழ்க்கைக்கான ஊட்டச்சத்து - ஹோலிஸ்டிக் க்ளோ</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  :root{
+    --gold:#FFD700;
+    --gold-2:#FFA500;
+    --gold-3:#FFC107;
+    --dark:#0f0f10;
+    --glass: rgba(0,0,0,0.5);
+    --light-glass: rgba(255,255,255,0.1);
+    --accent: #4a6cf7;
+    --purple: #9d4edd;
+    --pink: #c77dff;
+    --blue: #7209b7;
+    --teal: #4cc9f0;
+    --green: #06ffa5;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{font-family:'Montserrat',sans-serif; color:#fff; scroll-behavior:smooth; overflow-x:hidden;}
+  body{
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
+    background-size:cover;
+    position: relative;
+  }
+  
+  /* Animated background particles */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 20%),
+      radial-gradient(circle at 90% 80%, rgba(255, 165, 0, 0.05) 0%, transparent 20%),
+      radial-gradient(circle at 50% 50%, rgba(74, 108, 247, 0.03) 0%, transparent 50%);
+    z-index: -1;
+    animation: float 20s infinite linear;
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-20px) rotate(1deg); }
+  }
+  
+  /* Header / Title */
+  header{ 
+    text-align:center; 
+    padding:40px 20px; 
+    background: linear-gradient(135deg, var(--glass) 0%, rgba(0,0,0,0.7) 100%);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+    animation: pulse 8s infinite alternate;
+    z-index: -1;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(0.8); opacity: 0.3; }
+    100% { transform: scale(1.2); opacity: 0.1; }
+  }
+  
+  header h1{
+    margin:0;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--gold);
+    position: relative;
+    display: inline-block;
+  }
+  
+  header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  
+  /* Language dropdown */
+  .language-select{
+    position:absolute; top:20px; right:20px; z-index:10;
+    padding:10px 15px; border-radius:8px; border:1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.7); color:#fff; font-weight:600; cursor:pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+  }
+  
+  .language-select:hover {
+    background: rgba(255,215,0,0.2);
+    border-color: var(--gold);
+  }
+  
+  /* Nav */
+  nav{
+    position:sticky; top:0; z-index:8;
+    display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+    padding:15px; background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  
+  nav a{
+    color:#fff; text-decoration:none; font-weight:600;
+    padding:10px 16px; border-radius:8px; transition:all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  nav a:hover::before {
+    left: 100%;
+  }
+  
+  nav a:hover{ 
+    background: rgba(255,255,255,0.15); 
+    transform: translateY(-2px);
+  }
+  
+  nav a.active{ 
+    background: linear-gradient(90deg,var(--gold),var(--gold-2)); 
+    color:#000;
+    box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+  }
+  
+  /* Mobile topic dropdown (dark) */
+  #nav-select{
+    display:none; width:92%; margin:15px auto 0;
+    padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.75); color:#fff; font-weight:600;
+  }
+  
+  /* Post Container */
+  .post-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+  
+  .post-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .post-page-title {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    color: var(--gold);
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+  
+  .post-page-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  
+  .post-page-content {
+    background: linear-gradient(135deg, var(--glass) 0%, rgba(0,0,0,0.6) 100%);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  
+  .post-page-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+  
+  .post-page-text h3 {
+    color: var(--gold);
+    margin: 25px 0 15px;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .post-page-text ul {
+    margin: 15px 0;
+    padding-left: 20px;
+  }
+  
+  .post-page-text li {
+    margin-bottom: 10px;
+  }
+  
+  .post-page-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+  }
+  
+  .back-to-posts {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-2));
+    color: var(--dark);
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+  }
+  
+  .back-to-posts:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255,215,0,0.4);
+  }
+  
+  .back-to-posts i {
+    margin-right: 8px;
+  }
+  
+  /* Footer + ScrollTop */
+  footer{ 
+    background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
+    padding:30px 20px; 
+    text-align:center; 
+    color:var(--gold); 
+    border-top:2px solid var(--gold); 
+    margin-top:40px; 
+    border-radius:20px 20px 0 0;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+  }
+  
+  footer p {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  
+  #scrollTopBtn{
+    position:fixed; 
+    right:30px; 
+    bottom:30px; 
+    z-index:30; 
+    display:none;
+    background:linear-gradient(135deg, var(--gold), var(--gold-2)); 
+    color:#000; 
+    border:none; 
+    width:50px; 
+    height:50px; 
+    border-radius:50%; 
+    font-size:20px; 
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(0,0,0,.32);
+    transition: all 0.3s ease;
+  }
+  
+  #scrollTopBtn:hover{ 
+    background:var(--gold-2);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  }
+  
+  /* Responsive */
+  @media (max-width: 900px){
+    nav{ display:none; }   /* use dropdown on mobile */
+    #nav-select{ display:block; }
+    
+    .post-page-image {
+      height: 300px;
+    }
+    
+    header {
+      padding: 30px 15px;
+    }
+    
+    header h1 {
+      font-size: clamp(1.8rem, 5vw, 2.2rem);
+    }
+  }
+</style>
+</head>
+<body>
+<!-- Language Selector -->
+<select class="language-select" id="language-select" onchange="handleLanguageChange(this.value)">
+  <option value="en">English</option>
+  <option value="si">සිංහල</option>
+  <option value="ta" selected>தமிழ்</option>
+</select>
+<header>
+  <h1>சமச்சீரான வாழ்க்கைக்கான ஊட்டச்சத்து</h1>
+</header>
+<!-- Desktop Navigation -->
+<nav id="nav-bar">
+  <a href="tamil.html">முகப்பு</a>
+  <a href="health-t.html" class="active">சுகாதாரம் & நல்வாழ்வு</a>
+  <a href="selflove.html">சுய அன்பு & மன ஆரோக்கியம்</a>
+  <a href="relationships.html">உறவுகள் & குடும்பம்</a>
+  <a href="education.html">கல்வி & அறிவு</a>
+  <a href="motivation.html">ஊக்கமளித்தல் & உத்வேகம்</a>
+  <a href="spirituality.html">ஆன்மீகம் & ஈர்ப்பு விதி</a>
+  <a href="lifestyle.html">வாழ்க்கை முறை & அன்றாட வாழ்க்கை</a>
+  <a href="finance.html">நிதி & தொழில்</a>
+  <a href="trending.html">போக்குகள் & உலக செய்திகள்</a>
+  <a href="nature.html">இயற்கை & சுற்றுச்சூழல்</a>
+  <a href="technology.html">தொழில்நுட்பம் & புதுமை</a>
+  <a href="community.html">சமூகக் கதைகள்</a>
+</nav>
+<!-- Mobile Navigation Dropdown (dark) -->
+<select id="nav-select" onchange="handleTopicChange(this.value)">
+  <option value="tamil.html">முகப்பு</option>
+  <option value="health-t.html" selected>சுகாதாரம் & நல்வாழ்வு</option>
+  <option value="selflove.html">சுய அன்பு & மன ஆரோக்கியம்</option>
+  <option value="relationships.html">உறவுகள் & குடும்பம்</option>
+  <option value="education.html">கல்வி & அறிவு</option>
+  <option value="motivation.html">ஊக்கமளித்தல் & உத்வேகம்</option>
+  <option value="spirituality.html">ஆன்மீகம் & ஈர்ப்பு விதி</option>
+  <option value="lifestyle.html">வாழ்க்கை முறை & அன்றாட வாழ்க்கை</option>
+  <option value="finance.html">நிதி & தொழில்</option>
+  <option value="trending.html">போக்குகள் & உலக செய்திகள்</option>
+  <option value="nature.html">இயற்கை & சுற்றுச்சூழல்</option>
+  <option value="technology.html">தொழில்நுட்பம் & புதுமை</option>
+  <option value="community.html">சமூகக் கதைகள்</option>
+</select>
+<!-- Post Container -->
+<div class="post-container">
+  <div class="post-header">
+    <h2 class="post-page-title">சமச்சீரான வாழ்க்கைக்கான ஊட்டச்சத்து</h2>
+  </div>
+  
+  <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="சமச்சீரான வாழ்க்கைக்கான ஊட்டச்சத்து" class="post-page-image">
+  
+  <div class="post-page-content">
+    <div class="post-page-text">
+      <p>ஊட்டச்சத்து என்பது ஆரோக்கியமான மற்றும் சமநிலையான வாழ்க்கையின் அடித்தளமாகும். நாம் உட்கொள்ளும் உணவு நேரடியாக எங்கள் உடல் ஆரோக்கியம், மன தெளிவு, உணர்ச்சி நலன் மற்றும் ஒட்டுமொத்த ஆற்றலை பாதிக்கிறது. இந்த கட்டுரையில், உங்கள் உடலையும் மனதையும் ஊட்டும் சமச்சீரான உணவை எவ்வாறு உருவாக்குவது என்பதைப் பார்ப்போம், இது உங்கள் சிறந்த நல்வாழ்வுக்கான பயணத்தை ஆதரிக்கிறது.</p>
+      
+      <h3>சமச்சீரான ஊட்டச்சத்தைப் புரிந்துகொள்வது</h3>
+      <p>சமச்சீரான ஊட்டச்சத்து என்பது உங்கள் உடலுக்கு இயக்கத்திற்கு தேவையான அனைத்து அத்தியாவசிய ஊட்டச்சத்துக்களையும் வழங்குவதற்கு சரியான விகிதாச்சாரத்தில் பல்வேறு உணவுகளை உட்கொள்வதைக் குறிக்கிறது. இது கடுமையான உணவு கட்டுப்பாடுகள் அல்லது நீங்கள் விரும்பும் உணவுகளை விலக்குவது பற்றி அல்ல, மாறாக சிறப்பாக உணர்வது, அதிக ஆற்றல் பெறுவது, உங்கள் ஆரோக்கியத்தை மேம்படுத்துவது மற்றும் உங்கள் மனநிலையை மேம்படுத்துவது பற்றியது.</p>
+      
+      <h3>ஆரோக்கியமான உணவின் அடிப்படைக் கூறுகள்</h3>
+      <p>ஒரு சமச்சீரான உணவில் பல்வேறு உணவு குழுக்கள் அடங்கும், ஒவ்வொன்றும் வெவ்வேறு உடல் செயல்பாடுகளை ஆதரிக்கும் தனித்துவமான ஊட்டச்சத்துக்களை வழங்குகின்றன:</p>
+      
+      <ul>
+        <li><strong>புரதங்கள்:</strong> திசுக்களை கட்டுமானம் செய்து சரிசெய்வதற்கு, நொதிகள் மற்றும் ஹார்மோன்களை உருவாக்குவதற்கு, மற்றும் நோயெதிர்ப்பு செயல்பாட்டை ஆதரிப்பதற்கு அவசியம். உங்கள் உணவில் மெல்லிய இறைச்சி, மீன், முட்டை, பால் பொருட்கள், பருப்பு வகைகள், கொட்டைகள் மற்றும் விதைகளை சேர்க்கவும்.</li>
+        <li><strong>கார்போஹைட்ரேட்டுகள்:</strong> உடலின் முதன்மை ஆற்றல் ஆதாரம். நீடித்த ஆற்றல் மற்றும் நார்ச்சத்தை வழங்கும் முழு தானியங்கள், காய்கறிகள் மற்றும் பழங்கள் போன்ற சிக்கலான கார்போஹைட்ரேட்டுகளில் கவனம் செலுத்தவும்.</li>
+        <li><strong>கொழுப்புகள்:</strong> மூளை ஆரோக்கியம், ஹார்மோன் உற்பத்தி மற்றும் சில வைட்டமின்களை உட்கிரகிப்பதற்கு தேவைப்படுகிறது. அவகாடோ, ஆலிவ் எண்ணெய், கொட்டைகள் மற்றும் கொழுப்பு மீன்கள் போன்ற ஆரோக்கியமான கொழுப்பு ஆதாரங்களைத் தேர்ந்தெடுக்கவும்.</li>
+        <li><strong>வைட்டமின்கள் மற்றும் கனிமங்கள்:</strong> நோயெதிர்ப்பு ஆரோக்கியம் முதல் எலும்பு வலிமை வரை பல்வேறு உடல் செயல்பாடுகளை ஆதரிக்கின்றன. நீங்கள் பரந்த வரம்பில் பெறுவதை உறுதி செய்ய வண்ணம் பழங்கள் மற்றும் காய்கறிகளின் வண்ணப்பூக்களை உட்கொள்ளுங்கள்.</li>
+        <li><strong>தண்ணீர்:</strong> செரிமானம், ஊட்டச்சத்து உட்கிரகிப்பு, வெப்பநிலை ஒழுங்குமுறை மற்றும் நச்சு நீக்கத்திற்கு அவசியம். தினமும் குறைந்தது 8 கண்ணாடி தண்ணீர் குடிக்க நோக்கம் கொள்ளுங்கள்.</li>
+      </ul>
+      
+      <h3>மேம்படுத்தப்பட்ட நல்வாழ்வுக்கான சூப்பர் உணவுகள்</h3>
+      <p>அனைத்து முழு உணவுகளுக்கும் ஊட்டச்சத்து மதிப்பு இருந்தாலும், சில குறிப்பாக ஊட்டச்சத்து கொண்டவை மற்றும் விதிவிலக்கான ஆரோக்கிய நன்மைகளை வழங்குகின்றன. இந்த "சூப்பர் உணவுகளை" உங்கள் தினசரி உணவில் எளிதாக இணைக்கலாம்:</p>
+      
+      <ul>
+        <li><strong>பெர்ரிகள்:</strong> ஆக்ஸிஜனேற்ற எதிர்ப்பு, வைட்டமின்கள் மற்றும் நார்ச்சத்தில் நிறைந்தவை. ப்ளூபெர்ரிகள், ஸ்ட்ராபெர்ரிகள் மற்றும் ராஸ்பெர்ரிகள் மூளை ஆரோக்கியத்தை ஆதரிக்கின்றன மற்றும் அழற்சியைக் குறைக்கின்றன.</li>
+        <li><strong>இலை காய்கள்:</strong> ஸ்பினாச், கேல் மற்றும் ஸ்விஸ் சார்ட் ஆகியவை வைட்டமின்கள் A, C, K மற்றும் ஃபோலேட், அத்துடன் கால்சியம் மற்றும் இரும்பு ஆகியவற்றால் நிரம்பியுள்ளன.</li>
+        <li><strong>கொட்டைகள் மற்றும் விதைகள்:</strong> பாதாம் பருப்பு, வாதுமை பருப்பு, சியா விதைகள் மற்றும் ஃப்ளாக்ஸ் விதைகள் ஆரோக்கியமான கொழுப்புகள், புரதங்கள் மற்றும் நார்ச்சத்தை வழங்குகின்றன.</li>
+        <li><strong>கொழுப்பு மீன்கள்:</strong> சால்மன், மேக்கரல் மற்றும் சார்டின்கள் மூளை மற்றும் இதய ஆரோக்கியத்தை ஆதரிக்கும் ஒமேகா-3 கொழுப்பு அமிலங்களின் சிறந்த ஆதாரங்களாகும்.</li>
+        <li><strong>முழு தானியங்கள்:</strong> க்வினோவா, பழுப்பு அரிசி மற்றும் ஓட்ஸ் சிக்கலான கார்போஹைட்ரேட்டுகள், நார்ச்சத்து மற்றும் பி வைட்டமின்களை வழங்குகின்றன.</li>
+      </ul>
+      
+      <h3>சமநிலைக்கான உணவு திட்டமிடல்</h3>
+      <p>செயல்திறனான உணவு திட்டமிடல் சமச்சீரான ஊட்டச்சத்தை பராமரிப்பதற்கான முக்கிய விசையாகும். ஊட்டச்சத்து நிறைந்த உணவுகளைத் திட்டமிட உங்களுக்கு உதவும் சில உத்திகள் இங்கே:</p>
+      
+      <ul>
+        <li><strong>தட்டு முறை:</strong> உங்கள் தட்டின் பாதியை காய்கறிகள் மற்றும் பழங்களாலும், கால்பங்கில் ஒரு கால் பகுதியை மெல்லிய புரதத்தாலும், மற்றொரு கால் பகுதியை முழு தானியங்களாலும் நிரப்பவும்.</li>
+        <li><strong>முன்கூட்டியே தயாரித்தல்:</strong> ஒவ்வொரு வாரமும் கூடுகளை கழுவுதல், துண்டுகளாக நறுக்குதல் மற்றும் பொருட்களை பகுதியாகப் பிரிப்பதற்கு நேரத்தை ஒதுக்குங்கள். இது பரபரப்பான நாட்களில் ஆரோக்கியமான உணவை எளிதாக்குகிறது.</li>
+        <li><strong>தொகுதி சமைத்தல்:</strong> வாரம் முழுவதும் கலந்து பொருத்துவதற்கு தானியங்கள், புரதங்கள் மற்றும் சுட்ட காய்கறிகள் போன்ற அடிப்படை உணவுகளின் பெரிய அளவுகளைத் தயாரிக்கவும்.</li>
+        <li><strong>ஆரோக்கியமான சிற்றுண்டி:</strong> பதப்படுத்தப்பட்ட விருப்பங்களை தவிர்ப்பதற்கு பழங்கள், கொட்டைகள், தயிர் மற்றும் துண்டுகளாக வெட்டப்பட்ட காய்கறிகள் போன்ற ஊட்டச்சத்து நிறைந்த சிற்றுண்டிகளை எளிதில் கிடைக்கும்படி வைக்கவும்.</li>
+      </ul>
+      
+      <h3>உங்கள் உடலைக் கேட்பது</h3>
+      <p>ஊட்டச்சத்து வழிகாட்டுதல்களைப் பின்பற்றுவதைத் தாண்டி, உடல் விழிப்புணர்வை வளர்ப்பதும் உங்கள் உடலின் சமிக்ஞைகளை அங்கீகரிப்பதும் முக்கியம். வெவ்வேறு உணவுகள் உங்களை எப்படி உணர்விக்கின்றன என்பதை கவனியுங்கள். அவை உங்களுக்கு ஆற்றலூட்டுகின்றனவா அல்லது சோர்வடையச் செய்கின்றனவா? அவை செரிமானத்தை ஆதரிக்கின்றனவா அல்லது அசௌகரியத்தை ஏற்படுத்துகின்றனவா? இந்த தனிப்பயனாக்கப்பட்ட அணுகுமுறை உங்கள் தனித்துவமான தேவைகளை பூர்த்தி செய்ய உங்கள் உணவை நுட்பமாக சரிசெய்ய உதவுகிறது.</p>
+      
+      <h3>முடிவு</h3>
+      <p>சமச்சீரான வாழ்க்கைக்கான ஊட்டச்சத்து என்பது உங்கள் உடலையும் மனதையும் ஊட்டும் நீடித்த, அனுபவிக்கத்தக்க உண்ணும் முறையை உருவாக்குவதைப் பற்றியது. முழு உணவுகள், வகை மற்றும் மனதுள்ள உண்ணுதல் மீது கவனம் செலுத்துவதன் மூலம், நீங்கள் உங்கள் ஒட்டுமொத்த ஆரோக்கியம் மற்றும் நல்வாழ்வை ஆதரிக்கலாம். நினைவில் கொள்ளுங்கள், சிறிய, தொடர்ச்சியான மாற்றங்கள் நீடித்த முடிவுகளை அடைகின்றன. உங்கள் உணவில் ஒன்று அல்லது இரண்டு சரிசெய்தல்களுடன் தொடங்கி அங்கிருந்து உருவாக்குங்கள், வருங்கால ஆண்டுகளுக்கு உங்களுக்கு சேவை செய்யும் ஆரோக்கிய அடித்தளத்தை உருவாக்குங்கள்.</p>
+    </div>
+    
+    <div class="post-page-meta">
+      <div class="post-date">
+        <i class="far fa-calendar-alt"></i>
+        <span>மே 15, 2023</span>
+      </div>
+      <div class="post-category">
+        <i class="far fa-folder"></i>
+        <span>சுகாதாரம் & நல்வாழ்வு</span>
+      </div>
+    </div>
+  </div>
+  
+  <a href="../health-t.html" class="back-to-posts">
+    <i class="fas fa-arrow-left"></i> சுகாதார கட்டுரைகளுக்குத் திரும்பு
+  </a>
+</div>
+<!-- Footer -->
+<footer>
+  <p>© 2025 ஹோலிஸ்டிக் க்ளோ. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.</p>
+</footer>
+<button id="scrollTopBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">&#8679;</button>
+<script>
+// Handle language change - redirect to language-specific page
+function handleLanguageChange(lang) {
+  if (lang === 'si') {
+    window.location.href = '../sinhala.html';
+  } else if (lang === 'ta') {
+    window.location.href = '../tamil.html';
+  }
+}
+// Handle topic change - redirect to topic-specific page
+function handleTopicChange(topicPage) {
+  window.location.href = topicPage;
+}
+/* ===== Scroll-to-top visibility ===== */
+window.addEventListener('scroll', ()=>{ 
+  document.getElementById('scrollTopBtn').style.display=((document.documentElement.scrollTop || document.body.scrollTop)>120) ? 'grid':'none'; 
+});
+</script>
+</body>
+</html>
